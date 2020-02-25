@@ -1,8 +1,9 @@
 import React from 'react';
-import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { StyleSheet, Text, View, ScrollView} from 'react-native';
 import {Header, SearchBar} from 'react-native-elements';
 import {Banner, Button} from 'react-native-paper';
 import Axios from 'axios';
+import ListItem from './ListItem.js';
 
 export default class App extends React.Component {
 
@@ -27,18 +28,19 @@ export default class App extends React.Component {
 
   handleChange(search){
     console.log(search)
-    this.setState({search}, () => {
-      Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
-      .then((response) => {
-        console.log('here is the response --->', response.data)
-        this.setState({
-          data: response.data
+    
+      this.setState({search}, () => {
+        Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
+        .then((response) => {
+          console.log('here is the response --->', response.data)
+          this.setState({
+            data: response.data
+          })
         })
-      })
-      .catch(err => {
-        console.lof('nah, dude')
-      })
-    });
+        .catch(err => {
+          console.lof('nah, dude')
+        })
+      });
   };
   handleSubmit(){
     console.log('yo')
@@ -80,6 +82,7 @@ export default class App extends React.Component {
         },
       ]}
       >here is some random fucking text</Banner>
+
       <SearchBar
       value={this.state.search}
       onChangeText={this.handleChange}
@@ -89,10 +92,20 @@ export default class App extends React.Component {
       showLoading={true}
       returnKeyType = {'search'}
       />
+
         <Button mode="contained" onPress={() => this.handleSubmit()} color={'#3D4AA3'}>Searchミ</Button>
+        <ScrollView>
+        <ListItem />
+        <ListItem />
+        <ListItem />
+        <ListItem />
+        <ListItem />
+        <ListItem />
+        <ListItem />
       <View style={styles.container}>
         <Text>Search for your favorite anime!</Text>
       </View>
+      </ScrollView>
       </>
     );
   }
