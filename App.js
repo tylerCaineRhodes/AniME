@@ -52,7 +52,7 @@ export default class App extends React.Component {
     //make modal display
 
   }
-
+  
   handleChange(search){
     // console.log(search)
       this.setState({search})
