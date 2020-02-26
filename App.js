@@ -14,7 +14,7 @@ export default class App extends React.Component {
       data: [],
       savedList: [],
       visible: true,
-      infoIsVisible: true
+      infoIsVisible: false
 
     }
     this.handleChange = this.handleChange.bind(this);
@@ -82,7 +82,11 @@ export default class App extends React.Component {
     }}
     />
 
-    <Overlay isVisible={this.state.infoIsVisible} />
+    <Overlay isVisible={this.state.infoIsVisible} >
+      <View>
+        <Text>modal with text</Text>
+      </View>
+    </Overlay>
 
 
 <Banner 
