@@ -4,6 +4,7 @@ import {Header, SearchBar, Overlay} from 'react-native-elements';
 import {Banner, Button} from 'react-native-paper';
 import Axios from 'axios';
 import ListItem from './ListItem.js';
+import ItemInfo from './ItemInfo.js';
 
 export default class App extends React.Component {
 
@@ -13,6 +14,7 @@ export default class App extends React.Component {
       search: '',
       data: [],
       savedList: [],
+      currentAnime: {},
       visible: true,
       infoIsVisible: false
 
@@ -40,7 +42,7 @@ export default class App extends React.Component {
       // console.log('results object ----->', animeObj)
       this.setState({
         currentAnime: animeObj,
-        // infoIsVisible: true
+        infoIsVisible: true
       })
     })
     .then(() => {
@@ -52,7 +54,7 @@ export default class App extends React.Component {
     //make modal display
 
   }
-  
+
   handleChange(search){
     // console.log(search)
       this.setState({search})
@@ -97,9 +99,9 @@ export default class App extends React.Component {
     />
 
     <Overlay isVisible={this.state.infoIsVisible} >
-      <View>
-        <Text>modal with text</Text>
-      </View>
+      
+      <ItemInfo description={this.state.currentAnime.synopsis} title={this.state.currentAnime.title} title_japanese={this.state.currentAnime.title_japanese} image={this.state.currentAnime.url} type={this.state.currentAnime.type}/>
+      
     </Overlay>
 
 
