@@ -22,6 +22,7 @@ export default class App extends React.Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.requestAnime = this.requestAnime.bind(this);
+    this.handleGoHome = this.handleGoHome.bind(this);
   }
 
   componentDidMount(){
@@ -53,6 +54,11 @@ export default class App extends React.Component {
     })
     //make modal display
 
+  }
+  handleGoHome(){
+    this.setState({
+      infoIsVisible: false
+    })
   }
 
   handleChange(search){
@@ -100,7 +106,7 @@ export default class App extends React.Component {
 
     <Overlay isVisible={this.state.infoIsVisible} fullScreen={false} borderRadius={20} width={400} containerStyle={styles.modal}>
       
-      <ItemInfo description={this.state.currentAnime.synopsis} title={this.state.currentAnime.title} title_japanese={this.state.currentAnime.title_Japanese} image={this.state.currentAnime.url} type={this.state.currentAnime.type}/>
+      <ItemInfo description={this.state.currentAnime.synopsis} title={this.state.currentAnime.title} title_japanese={this.state.currentAnime.title_Japanese} image={this.state.currentAnime.url} type={this.state.currentAnime.type} handleGoHome={this.handleGoHome}/>
       
     </Overlay>
 

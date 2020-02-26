@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity} from 'react-native';
+import { AuthSession } from 'expo';
 
 export default function ListItem({title, image, description, itemId, requestAnime}){
   // console.log(image)
@@ -12,9 +13,9 @@ export default function ListItem({title, image, description, itemId, requestAnim
     <View style={styles.item}>
     <Image
       source={{uri: image}}
-      style={{width: 100, height: 100}}
+      style={{width: 100, height: 100, marginTop: 20}}
     />
-      <Text style={styles.title}>{title} and the id is {id}</Text>
+      <Text style={styles.title}>{title}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
     </TouchableOpacity>
@@ -36,9 +37,9 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     padding: 20,
+    // height: 160,
     borderWidth: 1,
-    overflow: 'scroll'
-
+    overflow: "visible"
   },
   title: {
     fontWeight:'bold',
@@ -50,7 +51,6 @@ const styles = StyleSheet.create({
     marginTop: 20,
     left: 150,
     position: 'absolute',
-    width: 250
-  
+    width: 250,
   }
 });
