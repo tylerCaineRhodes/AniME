@@ -37,7 +37,7 @@ export default class App extends React.Component {
       let result = [];
       //iterate over the object
       let animeObj = {};
-      animeObj = {'synopsis': response.data['synopsis'], 'title': response.data['title'], 'title_Japanese': response.data['title_japanese'], 'url': response.data['url'], 'type': response.data['type']}
+      animeObj = {'synopsis': response.data['synopsis'], 'title': response.data['title'], 'title_Japanese': response.data['title_japanese'], 'url': response.data['image_url'], 'type': response.data['type']}
      
       // console.log('results object ----->', animeObj)
       this.setState({
@@ -98,9 +98,9 @@ export default class App extends React.Component {
     }}
     />
 
-    <Overlay isVisible={this.state.infoIsVisible} >
+    <Overlay isVisible={this.state.infoIsVisible} fullScreen={false} borderRadius={20} width={400} containerStyle={styles.modal}>
       
-      <ItemInfo description={this.state.currentAnime.synopsis} title={this.state.currentAnime.title} title_japanese={this.state.currentAnime.title_japanese} image={this.state.currentAnime.url} type={this.state.currentAnime.type}/>
+      <ItemInfo description={this.state.currentAnime.synopsis} title={this.state.currentAnime.title} title_japanese={this.state.currentAnime.title_Japanese} image={this.state.currentAnime.url} type={this.state.currentAnime.type}/>
       
     </Overlay>
 
@@ -160,5 +160,9 @@ const styles = StyleSheet.create({
   },
   message: {
     top: 250
+  },
+  modal: {
+    // position: 'absolute',
+    // top: 20
   }
 });
