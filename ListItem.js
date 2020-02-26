@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image} from 'react-native';
 
-export default function ListItem({title, image, description}){
+export default function ListItem({title, image, description, itemId}){
   // console.log(image)
+  const [id] = useState(itemId);
   
   return (
     <View style={styles.item}>
@@ -10,7 +11,7 @@ export default function ListItem({title, image, description}){
       source={{uri: image}}
       style={{width: 100, height: 100}}
     />
-      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.title}>{title} and the id is {id}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
 

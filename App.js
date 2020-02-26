@@ -25,7 +25,7 @@ export default class App extends React.Component {
     // Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
   }
 
-  handleFuzzySearch
+  
 
   handleChange(search){
     // console.log(search)
@@ -119,7 +119,7 @@ export default class App extends React.Component {
           {this.state.data.map((item, i) => {
             // console.log('current item -->', item)
             return (
-              <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} />
+              <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} itemId={item.mal_id} />
             )
           })}
       
