@@ -3,12 +3,11 @@ import { StyleSheet, Text, View, TextInput, Image} from 'react-native';
 
 export default function ListItem({title, image, description}){
   // console.log(image)
-  let thing = JSON.stringify(image);
-  console.log(thing)
+  
   return (
     <View style={styles.item}>
     <Image
-      source={{uri: thing}}
+      source={{uri: image}}
       style={{width: 100, height: 100}}
     />
       <Text style={styles.title}>{title}</Text>

@@ -66,6 +66,8 @@ export default class App extends React.Component {
   };
 
   render(){
+    const opener = <Text style={styles.message}>Search for your favorite anime!</Text>
+    const nothing = <Text>""</Text>
     return (
       <>
       <Header
@@ -102,11 +104,11 @@ export default class App extends React.Component {
       returnKeyType = {'search'}
       />
 
-        <Button mode="contained" onPress={() => this.handleSubmit()} color={'#3D4AA3'}>Searchミ</Button>
+        <Button mode="contained" onPress={() => this.handleSubmit()} color={'#3D4AA3'}>Sミarch</Button>
         <ScrollView>
 
           {this.state.data.map((item, i) => {
-            console.log('current item -->', item)
+            // console.log('current item -->', item)
             return (
               <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} />
             )
@@ -117,7 +119,7 @@ export default class App extends React.Component {
     
       
       <View style={styles.container}>
-        <Text>Search for your favorite anime!</Text>
+       {this.state.data.length === 0 ? opener : nothing}
       </View>
       </ScrollView>
       </>
@@ -134,5 +136,8 @@ const styles = StyleSheet.create({
   },
   SearchBar: {
     backgroundColor:'grey'
+  },
+  message: {
+    top: 250
   }
 });
