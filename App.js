@@ -27,29 +27,38 @@ export default class App extends React.Component {
   handleFuzzySearch
 
   handleChange(search){
-    console.log(search)
-    
-      this.setState({search}, () => {
-        Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
-        .then((response) => {
-          console.log('here is the response --->', response.data)
-          this.setState({
-            data: response.data
-          })
-        })
-        .catch(err => {
-          console.lof('nah, dude')
-        })
-      });
-  };
+    // console.log(search)
+      this.setState({search})
+      // this.setState({search}, () => {
+      //   Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
+      //   .then((response) => {
+      //     console.log('here is the response --->', response.data)
+      //     this.setState({
+      //       data: response.data
+      //     })
+      //   })
+      //   .catch(err => {
+      //     console.lof('nah, dude')
+      //   })
+      // });
+   };
   handleSubmit(){
-    console.log('yo')
+    // console.log('this should be search -->', this.state.search)
     Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
     .then((response) => {
-      console.log('here is the response --->', response.data)
+      // console.log('here is the response --->', response.data)
+      //create result array
+      let result = [];
+      //iterate over the object
+      for(var keys in response.data){
+        result.push(response.data[keys])
+      }
       this.setState({
-        data: response.data
+        data: result[3]
       })
+    })
+    .then(() => {
+      // console.log('this data should be an array --->', this.state.data)
     })
     .catch(err => {
       console.lof('nah, dude')
@@ -62,7 +71,7 @@ export default class App extends React.Component {
       <Header
     leftComponent={{ icon: 'menu', color: '#fff' }}
     centerComponent={{ text: 'aniMミ', style: { color: '#fff', fontSize: 25 } }}
-    rightComponent={{ icon: 'home', color: '#fff' }}
+    rightComponent={{ icon: 'home', color: '#fff', onPress: ()=> console.log('go home')}}
     containerStyle={{
       backgroundColor: '#3D4AA3',
       justifyContent: 'space-around',
@@ -95,13 +104,18 @@ export default class App extends React.Component {
 
         <Button mode="contained" onPress={() => this.handleSubmit()} color={'#3D4AA3'}>Searchミ</Button>
         <ScrollView>
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
-        <ListItem />
+
+          {this.state.data.map((item, i) => {
+            console.log('current item -->', item)
+            return (
+              <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} />
+            )
+          })}
+
+
+         
+    
+      
       <View style={styles.container}>
         <Text>Search for your favorite anime!</Text>
       </View>

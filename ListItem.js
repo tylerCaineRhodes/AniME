@@ -1,15 +1,18 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, Image} from 'react-native';
 
-export default function ListItem(){
+export default function ListItem({title, image, description}){
+  // console.log(image)
+  let thing = JSON.stringify(image);
+  console.log(thing)
   return (
     <View style={styles.item}>
     <Image
+      source={{uri: thing}}
       style={{width: 100, height: 100}}
-      source={require('./assets/icon.png')}
     />
-      <Text style={styles.title}>Anime Name</Text>
-      <Text style={styles.description}>here is a description of an anime</Text>
+      <Text style={styles.title}>{title}</Text>
+      <Text style={styles.description}>{description}</Text>
     </View>
 
   );
@@ -30,6 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     borderWidth: 1,
+    overflow: 'scroll'
 
   },
   title: {
@@ -39,7 +43,10 @@ const styles = StyleSheet.create({
   },
   description: {
     top: 30,
-    position: 'relative',
-    right: 55
+    marginTop: 20,
+    left: 150,
+    position: 'absolute',
+    width: 250
+  
   }
 });
