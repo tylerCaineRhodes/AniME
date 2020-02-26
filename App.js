@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Header, SearchBar} from 'react-native-elements';
+import {Header, SearchBar, Overlay} from 'react-native-elements';
 import {Banner, Button} from 'react-native-paper';
 import Axios from 'axios';
 import ListItem from './ListItem.js';
@@ -13,7 +13,8 @@ export default class App extends React.Component {
       search: '',
       data: [],
       savedList: [],
-      visible: true
+      visible: true,
+      infoIsVisible: false
 
     }
     this.handleChange = this.handleChange.bind(this);
@@ -54,7 +55,8 @@ export default class App extends React.Component {
         result.push(response.data[keys])
       }
       this.setState({
-        data: result[3]
+        data: result[3],
+        search: ''
       })
     })
     .then(() => {
@@ -79,6 +81,7 @@ export default class App extends React.Component {
       justifyContent: 'space-around',
     }}
     />
+    
 
 <Banner 
       visible={this.state.visible} 
@@ -113,10 +116,6 @@ export default class App extends React.Component {
               <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} />
             )
           })}
-
-
-         
-    
       
       <View style={styles.container}>
        {this.state.data.length === 0 ? opener : nothing}
