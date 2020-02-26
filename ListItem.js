@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, TextInput, Image} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity} from 'react-native';
 
-export default function ListItem({title, image, description, itemId}){
+export default function ListItem({title, image, description, itemId, requestAnime}){
   // console.log(image)
   const [id] = useState(itemId);
+    //requestAnime(id)
   
   return (
+    
+    <TouchableOpacity onPress={() => requestAnime(id)}>  
     <View style={styles.item}>
     <Image
       source={{uri: image}}
@@ -14,6 +17,7 @@ export default function ListItem({title, image, description, itemId}){
       <Text style={styles.title}>{title} and the id is {id}</Text>
       <Text style={styles.description}>{description}</Text>
     </View>
+    </TouchableOpacity>
 
   );
 }

@@ -19,29 +19,43 @@ export default class App extends React.Component {
     }
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.requestAnime = this.requestAnime.bind(this);
   }
 
   componentDidMount(){
     // Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
   }
+  requestAnime(uniqueId){
+    console.log('here is the unique id being passd --> ', uniqueId)
+    //make an axios request with that id and set to state.
+    Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
+      .then((response) => {
+      // console.log('here is the response --->', response.data)
+      //create result array
+      let result = [];
+      //iterate over the object
+      let animeObj = {};
+      animeObj = {'synopsis': response.data['synopsis'], 'title': response.data['title'], 'title_Japanese': response.data['title_japanese'], 'url': response.data['url'], 'type': response.data['type']}
+     
+      // console.log('results object ----->', animeObj)
+      this.setState({
+        currentAnime: animeObj,
+        // infoIsVisible: true
+      })
+    })
+    .then(() => {
+      console.log('this data should be an object --->', this.state.currentAnime)
+    })
+    .catch(err => {
+      console.log('nah, dude', err)
+    })
+    //make modal display
 
-  
+  }
 
   handleChange(search){
     // console.log(search)
       this.setState({search})
-      // this.setState({search}, () => {
-      //   Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
-      //   .then((response) => {
-      //     console.log('here is the response --->', response.data)
-      //     this.setState({
-      //       data: response.data
-      //     })
-      //   })
-      //   .catch(err => {
-      //     console.lof('nah, dude')
-      //   })
-      // });
    };
   handleSubmit(){
     // console.log('this should be search -->', this.state.search)
@@ -119,7 +133,7 @@ export default class App extends React.Component {
           {this.state.data.map((item, i) => {
             // console.log('current item -->', item)
             return (
-              <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} itemId={item.mal_id} />
+              <ListItem key={i} image={item.image_url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} />
             )
           })}
       
