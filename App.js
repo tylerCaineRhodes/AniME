@@ -14,7 +14,7 @@ export default class App extends React.Component {
       data: [],
       savedList: [],
       visible: true,
-      infoIsVisible: false
+      infoIsVisible: true
 
     }
     this.handleChange = this.handleChange.bind(this);
@@ -81,7 +81,9 @@ export default class App extends React.Component {
       justifyContent: 'space-around',
     }}
     />
-    
+
+    <Overlay isVisible={this.state.infoIsVisible} />
+
 
 <Banner 
       visible={this.state.visible} 
