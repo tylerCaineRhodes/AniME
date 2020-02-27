@@ -26,6 +26,6 @@ create table savedlist (
   rating text
 );
 
--- insert into savedList (id, synopsis, title, title_japanese, url, type, episodes, rating) values (4, 'this is a cool anime about grape soda', 'high school magic project now','魔法の高校プロジェクトNOW!', 'https://images.alphacoders.com/205/205913.jpg','anime', 5, 'pg-13');
+insert into savedList (id, synopsis, title, title_japanese, url, type, episodes, rating) values (4, 'this is a cool anime about grape soda', 'high school magic project now','魔法の高校プロジェクトNOW!', 'https://images.alphacoders.com/205/205913.jpg','anime', 5, 'pg-13');
 
--- select * from savedList;
+select * from savedList;

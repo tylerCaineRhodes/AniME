@@ -34,10 +34,23 @@ export default class App extends React.Component {
     this.addToList = this.addToList.bind(this);
     this.goToHomeScreen = this.goToHomeScreen.bind(this);
     this.showList = this.showList.bind(this);
+    this.fetchUserList = this.fetchUserList.bind(this);
   }
 
   componentDidMount(){
-    //in componentdidmount, ftech from db and populate list component with savedlist state 
+    this.fetchUserList()
+  }
+  fetchUserList(){
+    Axios.get('http://localhost:3030/getUserList')
+    .then(response => {
+      console.log('here is the user data from mysql -->', response.data);
+      this.setState({
+        savedList: response.data
+      })
+    })
+    .catch(err => {
+      console.log('problem with fetching data dawg', err)
+    })
   }
   requestAnime(uniqueId){
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
