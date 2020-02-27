@@ -5,6 +5,7 @@ import {Banner, Button, ThemeProvider} from 'react-native-paper';
 import Axios from 'axios';
 import ListItem from './ListItem.js';
 import ItemInfo from './ItemInfo.js';
+import SavedItem from './SavedItem';
 
 export default class App extends React.Component {
 
@@ -156,7 +157,7 @@ export default class App extends React.Component {
     <Overlay isVisible={this.state.listShow} fullScreen={false} borderRadius={20} width={400} containerStyle={styles.modal}>
     {this.state.savedList.map((item, i) => {
       return (
-        <ListItem key={i} image={item.url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} />
+        <SavedItem key={i} image={item.url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} />
       )
       })}
       <Button mode="contained" onPress={() => this.handleGoHome()} color={'#3D4AA3'}>Homミ</Button>
