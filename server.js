@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const port = 3030;
 const app = express();
 const cors = require('cors');
+const db = require('./db/queries.js');
 
 app.use(cors());
 // app.use(express.static(path.join(__dirname,)))
