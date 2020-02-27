@@ -166,7 +166,7 @@ export default class App extends React.Component {
         <SavedItem key={i} image={item.url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} />
       )
       })}
-      <Button mode="contained" onPress={() => this.handleGoHome()} color={'#3D4AA3'}>Homミ</Button>
+      <Button mode="contained" style={styles.bigButton} onPress={() => this.handleGoHome()} color={'#3D4AA3'}>Homミ</Button>
    </Overlay> 
 
     <Banner 
@@ -194,7 +194,7 @@ export default class App extends React.Component {
         returnKeyType = {'search'}
       />
 
-        <Button mode="contained" onPress={() => this.handleSubmit()} color={'#3D4AA3'}>Sミarch</Button>
+        <Button mode="contained" style={styles.bigButton} onPress={() => this.handleSubmit()} color={'#3D4AA3'}>Sミarch</Button>
         <ScrollView>
 
           {this.state.data.map((item, i) => {
@@ -233,5 +233,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     left: 50,
     fontSize: 30
+  },
+  bigButton: {
+    marginHorizontal: 2,
+    borderRadius: 8
+
   }
 });

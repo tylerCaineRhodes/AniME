@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
   },
   button: {
     margin: 10,
-    backgroundColor: '#3D4AA3'
+    backgroundColor: '#3D4AA3',
+    borderRadius: 5
   }
 });

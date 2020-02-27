@@ -42,7 +42,8 @@ const styles = StyleSheet.create({
   title: {
     fontWeight:'bold',
     position: 'relative',
-    left: 55
+    left: 55,
+    // fontFamily:'sans-serif',
   },
   description: {
     top: 30,
