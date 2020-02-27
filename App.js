@@ -8,7 +8,11 @@ import ItemInfo from './ItemInfo.js';
 import SavedItem from './SavedItem';
 import Logo from './assets/animelogo_opt1.png';
 import AppLogo from './assets/animeicon_480.png';
-
+import Classics from './assets/animecollage1.jpg';
+import Newies from './assets/animecollage2.png';
+import Pikachu from './assets/pikachuWithHat.png';
+//<Image source={Classics} style={{width:'100%', height: 750}} />
+//<Image source={Pikachu} style={{width: 400, height: 400}} />
 export default class App extends React.Component {
 
   constructor(props){
@@ -138,7 +142,7 @@ export default class App extends React.Component {
   };
 
   render(){
-    const opener = <Image source={AppLogo} style={{width:150, height: 150}} />
+    const opener = <Image source={Classics} style={{width:'100%', height: 750}} />
     const nothing = <Text>""</Text>
     return (
       <>
@@ -201,6 +205,7 @@ export default class App extends React.Component {
           })}
       
         <View style={styles.message}>
+        {/* <Text style={styles.textHello}>Search for your favorite anime!</Text> */}
         {this.state.data.length === 0 ? opener : nothing}
         </View>
         </ScrollView>
@@ -220,11 +225,13 @@ const styles = StyleSheet.create({
     backgroundColor:'grey'
   },
   message: {
-    top: 500,
-    left: 130
+    // top: 200,
+    // left: 11,
+    overflow: 'scroll'
   },
-  modal: {
-    // position: 'absolute',
-    // top: 20
+  textHello: {
+    fontWeight: 'bold',
+    left: 50,
+    fontSize: 30
   }
 });
