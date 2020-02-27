@@ -1,9 +1,12 @@
 import React from 'react';
+import { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity, ScrollView} from 'react-native';
 import { Button } from 'react-native-elements';
 
-export default function ItemInfo ({description, title, title_japanese, image, type, handleGoHome}){
-  
+export default function ItemInfo ({description, title, title_japanese, image, type, handleGoHome, itemId, addToList}){
+
+  const [id] = useState(itemId);
+
  return (
    <ScrollView>
   <View style={styles.item}>
@@ -16,7 +19,7 @@ export default function ItemInfo ({description, title, title_japanese, image, ty
     <Text style={styles.description}>{description}</Text>
     <View style={styles.buttonLine}>
     <Button title='home 帰る' buttonStyle={styles.button} onPress={() => {handleGoHome()}}/>
-    <Button title='Add to list! セーブデータ' buttonStyle={styles.button}/>
+    <Button title='Add to list! セーブデータ' buttonStyle={styles.button} onPress={() => {addToList(itemId)}}/>
     </View>
   </View>
   </ScrollView>
@@ -46,9 +49,10 @@ const styles = StyleSheet.create({
   },
   buttonLine: {
     flex: 1,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   button: {
-    margin: 10
+    margin: 10,
+    backgroundColor: '#3D4AA3'
   }
 });

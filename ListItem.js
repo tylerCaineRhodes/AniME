@@ -8,8 +8,7 @@ export default function ListItem({title, image, description, itemId, requestAnim
     //requestAnime(id)
   
   return (
-    
-    <TouchableOpacity onPress={() => requestAnime(id)}>  
+    <TouchableOpacity onPress={() => requestAnime(itemId)}>  
     <View style={styles.item}>
     <Image
       source={{uri: image}}
@@ -19,7 +18,6 @@ export default function ListItem({title, image, description, itemId, requestAnim
       <Text style={styles.description}>{description}</Text>
     </View>
     </TouchableOpacity>
-
   );
 }
 
