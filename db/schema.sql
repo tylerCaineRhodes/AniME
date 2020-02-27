@@ -16,16 +16,16 @@ create database anime;
 use anime;
 
 create table savedlist (
-  id int not null primary key, 
-  synopsis text,
+  id int auto_increment primary key, 
   title text, 
   title_Japanese VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, 
   url text,
   type text, 
-  episodes smallint,
+  mal_id int,
+  episodes int,
   rating text
 );
 
-insert into savedList (id, synopsis, title, title_japanese, url, type, episodes, rating) values (4, 'this is a cool anime about grape soda', 'high school magic project now','魔法の高校プロジェクトNOW!', 'https://images.alphacoders.com/205/205913.jpg','anime', 5, 'pg-13');
+insert into savedList (title, title_japanese, url, type, mal_id, episodes, rating) values ('high school magic project now','魔法の高校プロジェクトNOW!', 'https://images.alphacoders.com/205/205913.jpg','anime',3,  5, 'pg-13');
 
 select * from savedList;

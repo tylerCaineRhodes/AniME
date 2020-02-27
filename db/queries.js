@@ -18,32 +18,19 @@ const getList = (callback) => {
   })
 }
 const postAnime = (anime, callback) => {
+  // console.log(anime.mal_id, anime.synopsis, anime.title, anime.title_Japanese, anime.url, anime.type, anime.episodes, anime.rating)
+  // console.log(typeof anime.synopsis)
   connection.query(
-    `insert into savedlist (id, synopsis, title, title_japanese, url, type, episodes, rating) values 
-    (
-      ${anime.mal_id}, 
-      '${anime.synopsis}', 
-      '${anime.title}', 
-      '${anime.title_Japanese}', 
-      '${anime.url}', 
-      '${anime.type}', 
-      ${anime.episodes}, 
-      '${anime.rating}' 
-      )`, (err, data) => {
-        if(err){
-          console.log('propblem with adding object to mysql table from db')
-          callback(err, null)
-        } else {
-          callback(null, data)
-        }
-      })
-  // 'title':response.data['title'], 
-  // 'title_Japanese':response.data['title_japanese'], 
-  // 'url':response.data['image_url'], 
-  // 'type':response.data['type'], 
-  // 'episodes':response.data['episodes'], 
-  // 'rating':response.data['rating']
+    `insert into savedlist(title, title_Japanese, url, type, episodes, mal_id, rating) values ('${anime.title}', '${anime.title_Japanese}', '${anime.url}', '${anime.type}', ${anime.episodes}, ${anime.mal_id}, '${anime.rating}');`,(err, data) => {
+      if(err){
+        console.log('propblem with adding object to mysql table from db')
+        callback(err, null)
+      } else {
+        callback(null, data)
+      }
+    })
 }
+
 
 connection.connect(err => {
   if(err){

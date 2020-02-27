@@ -66,7 +66,7 @@ export default class App extends React.Component {
       })
     })
     .catch(err => {
-      console.log('nah, dude', err)
+      console.log('nah, dude from request anime', err)
     })
   }
   
@@ -99,7 +99,9 @@ export default class App extends React.Component {
       'episodes':response.data['episodes'], 
       'rating':response.data['rating']
     })
-    .then(() => console.log('sent post to server'))
+    .then(() => {
+      this.fetchUserList()
+    })
     .catch((err) => {
       console.log('didn\'t work when sending from axios', err)
     })
