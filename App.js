@@ -16,7 +16,7 @@ export default class App extends React.Component {
       savedList: [],
       currentAnime: {},
       listShow: false,
-      visible: true,
+      visible: false,
       infoIsVisible: false
 
     }
