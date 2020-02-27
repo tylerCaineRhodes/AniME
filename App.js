@@ -1,11 +1,13 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Header, SearchBar, Overlay} from 'react-native-elements';
+import {Header, SearchBar, Overlay, Image} from 'react-native-elements';
 import {Banner, Button, ThemeProvider} from 'react-native-paper';
 import Axios from 'axios';
 import ListItem from './ListItem.js';
 import ItemInfo from './ItemInfo.js';
 import SavedItem from './SavedItem';
+import Logo from './assets/animelogo_opt1.png';
+import AppLogo from './assets/animeicon_480.png';
 
 export default class App extends React.Component {
 
@@ -136,13 +138,13 @@ export default class App extends React.Component {
   };
 
   render(){
-    const opener = <Text style={styles.message}>Search for your favorite anime!</Text>
+    const opener = <Image source={AppLogo} style={{width:150, height: 150}} />
     const nothing = <Text>""</Text>
     return (
       <>
       <Header
-    leftComponent={{ icon: 'menu', color: '#fff', onPress: () => {this.setState({visible: true})}}}
-    centerComponent={{ text: 'aniMミ', style: { color: '#fff', fontSize: 25 } }}
+    leftComponent={{ icon: 'menu', color: '#fff', onPress: () => {this.setState({visible: !this.state.visible})}}}
+    centerComponent={<Image source={Logo} style={{width:150, height: 50, marginBottom: 20}} />}
     rightComponent={{ icon: 'home', color: '#fff', onPress: () => {this.goToHomeScreen()}}}
     containerStyle={{
       backgroundColor: '#3D4AA3',
@@ -198,7 +200,7 @@ export default class App extends React.Component {
             )
           })}
       
-        <View style={styles.container}>
+        <View style={styles.message}>
         {this.state.data.length === 0 ? opener : nothing}
         </View>
         </ScrollView>
@@ -218,7 +220,8 @@ const styles = StyleSheet.create({
     backgroundColor:'grey'
   },
   message: {
-    top: 250
+    top: 500,
+    left: 130
   },
   modal: {
     // position: 'absolute',
