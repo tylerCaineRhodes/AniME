@@ -40,30 +40,20 @@ export default class App extends React.Component {
     //in componentdidmount, ftech from db and populate list component with savedlist state 
   }
   requestAnime(uniqueId){
-    console.log('here is the unique id being passed --> ', uniqueId)
-    //make an axios request with that id and set to state.
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
-      // console.log('here is the response --->', response.data)
-      //create result array
-      //iterate over the object
       let animeObj = {};
       animeObj = {'synopsis': response.data['synopsis'], 'title': response.data['title'], 'title_Japanese': response.data['title_japanese'], 'url': response.data['image_url'], 'type': response.data['type'], 'mal_id':response.data['mal_id']}
      
-      // console.log('results object ----->', animeObj)
       this.setState({
         currentAnime: animeObj,
         infoIsVisible: true,
         listShow: false,
       })
     })
-    .then(() => {
-      // console.log('this data should be an object --->', this.state.currentAnime)
-    })
     .catch(err => {
       console.log('nah, dude', err)
     })
-    //make modal display
   }
   handleGoHome(){
     this.setState({
@@ -83,48 +73,31 @@ export default class App extends React.Component {
     })
   }
   addToList(uniqueId){
-    console.log('here is the unique id being passed --> ', uniqueId)
-    //make an axios request with that id and set to state.
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
-      // console.log('here is the response --->', response.data)
-      //iterate over the object
-      let temp = [];
       let animeObj = {};
       animeObj = {'synopsis': response.data['synopsis'], 'title': response.data['title'], 'title_Japanese': response.data['title_japanese'], 'url': response.data['image_url'], 'type': response.data['type'], 'mal_id':response.data['mal_id']}
-      //concat this to state
-      // console.log('results object ----->', animeObj)
       let newState = this.state.savedList.slice();
       newState.push(animeObj);
-      console.log('here is the new state--->', newState);
+
       this.setState({
-        savedList: newState
+        savedList: newState,
+        infoIsVisible: false
       })
-    })
-    .then(() => {
-      // console.log('this data should be an object --->', this.state.savedList)
     })
     .catch(err => {
       console.log('nah, dude', err)
-    })
-    //get unique id from iteminfo
-    //query for that anime
-    //create an object and add it to a mysql table
-    //in componentdidmount, ftech from db and populate list component with savedlist state 
+    }) 
   }
 
   handleChange(search){
-    // console.log(search)
       this.setState({search})
    };
   handleSubmit(){
-    // console.log('this should be search -->', this.state.search)
     Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
     .then((response) => {
-      // console.log('here is the response --->', response.data)
-      //create result array
       let result = [];
-      //iterate over the object
+
       for(var keys in response.data){
         result.push(response.data[keys])
       }
@@ -132,9 +105,6 @@ export default class App extends React.Component {
         data: result[3],
         search: ''
       })
-    })
-    .then(() => {
-      // console.log('this data should be an array --->', this.state.data)
     })
     .catch(err => {
       console.log('nah, dude')
@@ -161,12 +131,14 @@ export default class App extends React.Component {
     </Overlay>
 
     <Overlay isVisible={this.state.listShow} fullScreen={false} borderRadius={20} width={400} containerStyle={styles.modal}>
+    <ScrollView>
     {this.state.savedList.map((item, i) => {
       return (
         <SavedItem key={i} image={item.url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} />
       )
       })}
       <Button mode="contained" style={styles.bigButton} onPress={() => this.handleGoHome()} color={'#3D4AA3'}>Homミ</Button>
+      </ScrollView>
    </Overlay> 
 
     <Banner 
