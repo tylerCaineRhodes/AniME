@@ -43,7 +43,7 @@ export default class App extends React.Component {
   fetchUserList(){
     Axios.get('http://localhost:3030/getUserList')
     .then(response => {
-      console.log('here is the user data from mysql -->', response.data);
+      // console.log('here is the user data from mysql -->', response.data);
       this.setState({
         savedList: response.data
       })
@@ -52,6 +52,7 @@ export default class App extends React.Component {
       console.log('problem with fetching data dawg', err)
     })
   }
+
   requestAnime(uniqueId){
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
@@ -68,6 +69,7 @@ export default class App extends React.Component {
       console.log('nah, dude', err)
     })
   }
+  
   handleGoHome(){
     this.setState({
       infoIsVisible: false,
@@ -85,31 +87,48 @@ export default class App extends React.Component {
       listShow: true
     })
   }
+
+  postNewItem(response){
+    Axios.post('http://localhost:3030/postNewItem', {
+      'synopsis':response.data['synopsis'], 
+      'title':response.data['title'], 
+      'title_Japanese':response.data['title_japanese'], 
+      'url':response.data['image_url'], 
+      'type':response.data['type'], 
+      'mal_id':response.data['mal_id'], 
+      'episodes':response.data['episodes'], 
+      'rating':response.data['rating']
+    })
+    .then(() => console.log('sent post to server'))
+    .catch((err) => {
+      console.log('didn\'t work when sending from axios', err)
+    })
+  }
+
   addToList(uniqueId){
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
       let animeObj = {};
-      console.log('response object ---> ', response.data)
-      //rating
-      //type
-      //episodes
-      animeObj = {
-        'synopsis': response.data['synopsis'], 
-        'title': response.data['title'], 
-        'title_Japanese': response.data['title_japanese'], 
-        'url': response.data['image_url'], 
-        'type': response.data['type'], 
-        'mal_id':response.data['mal_id'], 
-        'episodes':response.data['episodes'], 
-        'rating':response.data['rating']
-      } //post this
-      let newState = this.state.savedList.slice();
-      newState.push(animeObj);
+      // console.log('response object ---> ', response.data)
+      this.postNewItem(response)
+      
+      // animeObj = {
+      //   'synopsis': response.data['synopsis'], 
+      //   'title': response.data['title'], 
+      //   'title_Japanese': response.data['title_japanese'], 
+      //   'url': response.data['image_url'], 
+      //   'type': response.data['type'], 
+      //   'mal_id':response.data['mal_id'], 
+      //   'episodes':response.data['episodes'], 
+      //   'rating':response.data['rating']
+      // } //post this
+      // let newState = this.state.savedList.slice();
+      // newState.push(animeObj);
 
-      this.setState({
-        savedList: newState,
-        infoIsVisible: false
-      })
+      // this.setState({
+      //   savedList: newState,
+      //   infoIsVisible: false
+      // })
     })
     .catch(err => {
       console.log('nah, dude', err)

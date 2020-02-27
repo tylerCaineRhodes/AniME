@@ -24,3 +24,14 @@ app.get('/getUserList', (req, res) => {
     }
   })
 })
+
+app.post('/postNewItem', (req, res) => {
+  console.log('here are the params -->', req.body)
+  db.postAnime(req.body, (err, data) => {
+    if(err){
+      console.log('problem with posting to table in mysql in server')
+    } else {
+      res.send(data)
+    }
+  })
+})
