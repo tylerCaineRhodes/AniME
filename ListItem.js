@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     // height: 160,
-    borderWidth: .6,
+    borderWidth: .3, //get tay opinion
     overflow: "hidden",
   },
   title: {

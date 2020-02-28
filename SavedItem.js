@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity} from 'react-native';
-import {Button} from 'react-native-elements';
+import {Button, Icon} from 'react-native-elements';
 import { AuthSession } from 'expo';
 
 export default function SavedItem({title, image, description, itemId, requestAnime}){
@@ -15,11 +15,16 @@ export default function SavedItem({title, image, description, itemId, requestAni
       source={{uri: image}}
       style={{width: 100, height: 100, position: "absolute", margin: 10}}
     />
-      <Text style={styles.title}>{title}</Text>
+
+      <View style={styles.itemContainer}>
+      <Text ellipsizeMode='tail' style={styles.title} numberOfLines={1}>{title}</Text>
+      </View>
+   
       {/* <Text style={styles.description}>{description}</Text> */}
       <View style={styles.buttonsPair}>
-      <Button title='remove' buttonStyle={styles.buttonDelete} onPress={() => {handleGoHome()}}/>
-      <Button title='share' buttonStyle={styles.buttonShare} onPress={() => {handleGoHome()}}/>
+  <Icon name="cancel" size={28} color={'red'} onPress={() => {handleGoHome()}} containerStyle={styles.buttonDelete} />
+  <Icon name="share" size={30} color={'#3D4AA3'} onPress={() => {handleGoHome()}} containerStyle={styles.buttonShare} />
+
       </View>
     </View>
     </TouchableOpacity>
@@ -40,7 +45,7 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     flexDirection: 'row',
-    padding: 20,
+    padding: 25,
     // height: 160,
     borderWidth: 1,
     borderRadius: 20,
@@ -49,8 +54,8 @@ const styles = StyleSheet.create({
   title: {
     fontWeight:'bold',
     position: 'absolute',
-    right: 50,
-    top: 50
+    textAlignVertical: 'center',
+    fontSize: 20
   },
   description: {
     top: 30,
@@ -64,15 +69,26 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   buttonDelete: {
-    top: '75%',
-    left: 110,
-    backgroundColor: 'red',
-    padding: 5
+    top: '80%',
+    left: 14,
+    backgroundColor: 'white',
+    padding: 0,
+    
   },
   buttonShare: {
-    top: 15,
-    left: 200,
-    backgroundColor: '#3D4AA3',
-    padding: 5
+    top: 18,
+    right: 200,
+  },
+  itemContainer: {
+    flex: 1,
+    flexDirection: 'row',
+    left: '27%',
+    bottom: '20%',
+    textAlign: 'left',
+    marginHorizontal: '3%',
+    borderWidth: 0,
+    overflow: 'hidden',
+    height:40,
+    // width: '100%'
   }
 });

@@ -176,6 +176,8 @@ export default class App extends React.Component {
    </Overlay> 
 
     <Banner 
+      style= {styles.Banner}
+      contentStyle={styles.links}
       visible={this.state.visible} 
       actions={[
         {
@@ -242,7 +244,6 @@ const styles = StyleSheet.create({
   },
   bigButton: {
     marginHorizontal: 2,
-    borderRadius: 8
-
-  }
+    borderRadius: 15
+  },
 });
