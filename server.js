@@ -37,6 +37,13 @@ app.post('/postNewItem', (req, res) => {
 })
 
 app.delete('/deleteAnime', (req, res) => {
-  console.log(req)
-
+  console.log(req.query.uniqueId)
+  db.deleteAnime(req.query.uniqueId, (err, data) => {
+    if(err){
+      console.log('nah did not delete from db in server')
+    } else {
+      console.log('succesfully deleted the thing')
+      res.end();
+    }
+  })
 })

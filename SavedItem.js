@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity} from 'react
 import {Button, Icon} from 'react-native-elements';
 import { AuthSession } from 'expo';
 
-export default function SavedItem({title, image, description, itemId, requestAnime}){
+export default function SavedItem({title, image, description, itemId, requestAnime, deleteAnime}){
   // console.log(image)
   const [id] = useState(itemId);
     //requestAnime(id)
@@ -22,7 +22,7 @@ export default function SavedItem({title, image, description, itemId, requestAni
    
       {/* <Text style={styles.description}>{description}</Text> */}
       <View style={styles.buttonsPair}>
-  <Icon name="cancel" size={28} color={'red'} onPress={() => {handleGoHome()}} containerStyle={styles.buttonDelete} />
+  <Icon name="cancel" size={28} color={'red'} onPress={() => {deleteAnime(itemId)}} containerStyle={styles.buttonDelete} />
   <Icon name="share" size={30} color={'#3D4AA3'} onPress={() => {handleGoHome()}} containerStyle={styles.buttonShare} />
 
       </View>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, ScrollView} from 'react-native';
-import {Header, SearchBar, Overlay, Image} from 'react-native-elements';
+import {Header, SearchBar, Overlay, Image, Icon} from 'react-native-elements';
 import {Banner, Button, ThemeProvider} from 'react-native-paper';
 import Axios from 'axios';
 import ListItem from './ListItem.js';
@@ -35,6 +35,7 @@ export default class App extends React.Component {
     this.goToHomeScreen = this.goToHomeScreen.bind(this);
     this.showList = this.showList.bind(this);
     this.fetchUserList = this.fetchUserList.bind(this);
+    this.deleteAnime = this.deleteAnime.bind(this);
   }
 
   componentDidMount(){
@@ -106,6 +107,18 @@ export default class App extends React.Component {
       console.log('didn\'t work when sending from axios', err)
     })
   }
+  deleteAnime(uniqueId){
+    Axios.delete('http://localhost:3030/deleteAnime', {
+      params: {uniqueId}
+    })
+    .then(() => {
+      console.log('succesfully deleted!')
+      this.fetchUserList()
+    })
+    .catch((err) => {
+      console.log('couldn\'t delete from front', err)
+    })
+  }
 
   addToList(uniqueId){
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
@@ -127,6 +140,7 @@ export default class App extends React.Component {
   handleChange(search){
       this.setState({search})
    };
+
   handleSubmit(){
     Axios.get( `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
     .then((response) => {
@@ -151,9 +165,9 @@ export default class App extends React.Component {
     return (
       <>
       <Header
-    leftComponent={{ icon: 'menu', color: '#fff', onPress: () => {this.setState({visible: !this.state.visible})}}}
+    leftComponent={{ icon: 'home', color: '#fff', onPress: () => {this.goToHomeScreen()}}}
     centerComponent={<Image source={Logo} style={{width:150, height: 50, marginBottom: 20}} />}
-    rightComponent={{ icon: 'home', color: '#fff', onPress: () => {this.goToHomeScreen()}}}
+    rightComponent={{ icon: 'list', color: '#fff', onPress: () => {this.showList()}}}
     containerStyle={{
       backgroundColor: '#3D4AA3',
       justifyContent: 'space-around',
@@ -168,7 +182,7 @@ export default class App extends React.Component {
     <ScrollView>
     {this.state.savedList.map((item, i) => {
       return (
-        <SavedItem key={i} image={item.url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} />
+        <SavedItem key={i} image={item.url} title={item.title} description={item.synopsis} itemId={item.mal_id} requestAnime={this.requestAnime} deleteAnime={this.deleteAnime} />
       )
       })}
       <Button mode="contained" style={styles.bigButton} onPress={() => this.handleGoHome()} color={'#3D4AA3'}>Homミ</Button>
@@ -176,19 +190,36 @@ export default class App extends React.Component {
    </Overlay> 
 
     <Banner 
-      style= {styles.Banner}
+      style= {styles.banner}
       contentStyle={styles.links}
       visible={this.state.visible} 
       actions={[
         {
-          label: 'Hide',
+          label: 'profile',
           onPress: () => this.setState({ visible: false }),
         },
         {
-          label: 'List',
+          label: 'settings',
+          onPress: () => this.setState({ listShow: true}),
+        },
+        {
+          label: 'friends',
+          onPress: () => this.setState({ listShow: true}),
+        },
+        {
+          label: 'list',
           onPress: () => this.setState({ listShow: true}),
         },
       ]}
+      // icon={({ size }) =>
+      //     <Image
+      //       source={Pikachu}
+      //       style={{
+      //         width: 10,
+      //         height: 20,
+      //       }}
+      //     />
+      //   }
       >
      </Banner>
 
@@ -245,5 +276,12 @@ const styles = StyleSheet.create({
   bigButton: {
     marginHorizontal: 2,
     borderRadius: 15
+  },
+  links: {
+    left: 0
+  },
+  banner:{
+    opacity: 1.5,
+   
   },
 });
