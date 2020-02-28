@@ -26,6 +26,7 @@ create table savedlist (
   rating text
 );
 
-insert into savedList (title, title_japanese, url, type, mal_id, episodes, rating) values ('high school magic project now','魔法の高校プロジェクトNOW!', 'https://images.alphacoders.com/205/205913.jpg','anime',3,  5, 'pg-13');
+insert into savedList (title, title_japanese, url, type, mal_id, episodes, rating) values ('MagicHighskewlProjectNOW!','魔法の高校プロジェクトNOW!', 'https://www.allthingsdogs.com/wp-content/uploads/2020/02/Dog-Sneezing-Feature.jpg','anime',3,  5, 'pg-13');
+insert into savedList (title, title_japanese, url, type, mal_id, episodes, rating) values ('Hair Man','髪の男', 'https://watchmojo.com/uploads/blipthumbs/VG-RP-Top10-Absurd-VideoGame-Hairstyles-720p30_480.jpg','hair', 666,  5, "hairded hair hair");
 
 select * from savedList;
