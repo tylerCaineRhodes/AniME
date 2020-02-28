@@ -113,24 +113,11 @@ export default class App extends React.Component {
       let animeObj = {};
       // console.log('response object ---> ', response.data)
       this.postNewItem(response)
-      
-      // animeObj = {
-      //   'synopsis': response.data['synopsis'], 
-      //   'title': response.data['title'], 
-      //   'title_Japanese': response.data['title_japanese'], 
-      //   'url': response.data['image_url'], 
-      //   'type': response.data['type'], 
-      //   'mal_id':response.data['mal_id'], 
-      //   'episodes':response.data['episodes'], 
-      //   'rating':response.data['rating']
-      // } //post this
-      // let newState = this.state.savedList.slice();
-      // newState.push(animeObj);
-
-      // this.setState({
-      //   savedList: newState,
-      //   infoIsVisible: false
-      // })
+    })
+    .then(() => {
+      this.setState({
+        infoIsVisible: false
+      })
     })
     .catch(err => {
       console.log('nah, dude', err)

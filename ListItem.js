@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 20,
     // height: 160,
-    borderWidth: 1,
+    borderWidth: .6,
     overflow: "hidden",
   },
   title: {

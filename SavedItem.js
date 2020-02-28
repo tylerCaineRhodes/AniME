@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
   buttonShare: {
     top: 15,
     left: 200,
-    backgroundColor: 'blue',
+    backgroundColor: '#3D4AA3',
     padding: 5
   }
 });
