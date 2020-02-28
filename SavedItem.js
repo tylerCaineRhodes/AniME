@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TextInput, Image, TouchableOpacity} from 'react-native';
+import {Button} from 'react-native-elements';
 import { AuthSession } from 'expo';
 
 export default function SavedItem({title, image, description, itemId, requestAnime}){
@@ -16,6 +17,10 @@ export default function SavedItem({title, image, description, itemId, requestAni
     />
       <Text style={styles.title}>{title}</Text>
       {/* <Text style={styles.description}>{description}</Text> */}
+      <View style={styles.buttonsPair}>
+      <Button title='remove' buttonStyle={styles.buttonDelete} onPress={() => {handleGoHome()}}/>
+      <Button title='share' buttonStyle={styles.buttonShare} onPress={() => {handleGoHome()}}/>
+      </View>
     </View>
     </TouchableOpacity>
   );
@@ -35,7 +40,7 @@ const styles = StyleSheet.create({
   item: {
     flex: 1,
     flexDirection: 'row',
-    padding: 60,
+    padding: 20,
     // height: 160,
     borderWidth: 1,
     borderRadius: 20,
@@ -53,5 +58,21 @@ const styles = StyleSheet.create({
     left: 150,
     position: 'relative',
     width: 250,
+  },
+  buttonPair: {
+    flex: 1,
+    flexDirection: 'column',
+  },
+  buttonDelete: {
+    top: '75%',
+    left: 110,
+    backgroundColor: 'red',
+    padding: 5
+  },
+  buttonShare: {
+    top: 15,
+    left: 200,
+    backgroundColor: 'blue',
+    padding: 5
   }
 });

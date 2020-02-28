@@ -30,6 +30,15 @@ const postAnime = (anime, callback) => {
       }
     })
 }
+const deleteAnime = (id, callback) => {
+  connection.query(`delete from savedlist where mal_id = ${id}`,(err, data) => {
+    if(err){
+      console.log('whoops in deleting a thing from db')
+    } else {
+      callback(null, data)
+    }
+  })
+}
 
 
 connection.connect(err => {
@@ -40,4 +49,4 @@ connection.connect(err => {
   }
 })
 
-module.exports = {getList, postAnime}
+module.exports = {getList, postAnime, deleteAnime}

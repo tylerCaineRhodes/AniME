@@ -35,3 +35,8 @@ app.post('/postNewItem', (req, res) => {
     }
   })
 })
+
+app.delete('/deleteAnime', (req, res) => {
+  console.log(req)
+
+})
