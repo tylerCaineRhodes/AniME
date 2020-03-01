@@ -5,3 +5,5 @@
   * Get anime info including title, image, sypopsis, and medium type.  
 
 <img src ='listView.png' width = '190px' /><img src = 'anime detail page.png' width = '190px' /><img src = 'savedList.png' width = '190px' />
+
+<img src = 'aniME video.gif' />
