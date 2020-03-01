@@ -4,4 +4,5 @@
   * Quickly search and save anime suggestions without the hassle of Google or desktop sites.
   * Get anime info including title, image, sypopsis, and medium type.  
 
-<img src = 'anime detail page.png' />
+
+![logo](anime detail page.png)
