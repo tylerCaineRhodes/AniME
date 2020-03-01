@@ -5,4 +5,4 @@
   * Get anime info including title, image, sypopsis, and medium type.  
 
 
-![logo](anime detail page.png)
+<img src = 'anime detail page.png' />
