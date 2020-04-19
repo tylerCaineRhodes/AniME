@@ -4,7 +4,7 @@ const bodyParser = require('body-parser');
 const port = 3030;
 const app = express();
 const cors = require('cors');
-const db = require('./db/queries.js');
+const {getList, postAnime, deleteAnime} = require('./db/queries.js');
 
 app.use(cors());
 app.use(express.static(path.join(__dirname,)))
@@ -16,7 +16,7 @@ app.listen(port, () => {
 })
 
 app.get('/getUserList', (req, res) => {
-  db.getList((err, data) => {
+  getList((err, data) => {
     if(err){
       console.log('problem in fetching list from server')
     }else{
@@ -27,7 +27,7 @@ app.get('/getUserList', (req, res) => {
 
 app.post('/postNewItem', (req, res) => {
   console.log('here are the params -->', req.body)
-  db.postAnime(req.body, (err, data) => {
+  postAnime(req.body, (err, data) => {
     if(err){
       console.log('problem with posting to table in mysql in server')
     } else {
@@ -38,7 +38,7 @@ app.post('/postNewItem', (req, res) => {
 
 app.delete('/deleteAnime', (req, res) => {
   console.log(req.query.uniqueId)
-  db.deleteAnime(req.query.uniqueId, (err, data) => {
+  deleteAnime(req.query.uniqueId, (err, data) => {
     if(err){
       console.log('nah did not delete from db in server')
     } else {
