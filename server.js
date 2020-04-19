@@ -4,45 +4,45 @@ const bodyParser = require('body-parser');
 const port = 3030;
 const app = express();
 const cors = require('cors');
-const {getList, postAnime, deleteAnime} = require('./db/queries.js');
+const { getList, postAnime, deleteAnime } = require('./db/queries.js');
 
 app.use(cors());
-app.use(express.static(path.join(__dirname,)))
+app.use(express.static(path.join(__dirname)));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(port, () => {
   console.log(`you're officially listening to your mom at port ${port}`);
-})
+});
 
 app.get('/getUserList', (req, res) => {
   getList()
-    .then(data => {
-      res.send(data)
+    .then((data) => {
+      res.send(data);
     })
-    .catch(err => {
-      res.status(518).send(err)
-    }) 
-})
+    .catch((err) => {
+      res.status(518).send(err);
+    });
+});
 
 app.post('/postNewItem', (req, res) => {
-  console.log('here are the params -->', req.body)
+  console.log('here are the params -->', req.body);
   postAnime(req.body)
-    .then(data => {
-      res.send(data)
+    .then((data) => {
+      res.send(data);
     })
-    .catch(err => {
-      res.status(500).send(err)
-    })
-})
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
 
 app.delete('/deleteAnime', (req, res) => {
-  console.log(req.query.uniqueId)
+  console.log(req.query.uniqueId);
   deleteAnime(req.query.uniqueId)
-    .then(data => {
-      res.send(data)
+    .then((data) => {
+      res.send(data);
     })
-    .catch(err => {
-      res.status(500).send(err)
-    })
-})
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
