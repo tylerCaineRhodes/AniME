@@ -7,7 +7,7 @@ const cors = require('cors');
 const db = require('./db/queries.js');
 
 app.use(cors());
-// app.use(express.static(path.join(__dirname,)))
+app.use(express.static(path.join(__dirname,)))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
