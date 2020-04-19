@@ -16,34 +16,33 @@ app.listen(port, () => {
 })
 
 app.get('/getUserList', (req, res) => {
-  getList((err, data) => {
-    if(err){
-      console.log('problem in fetching list from server')
-    }else{
+  getList()
+    .then(data => {
       res.send(data)
-    }
-  })
+    })
+    .catch(err => {
+      res.status(518).send(err)
+    }) 
 })
 
 app.post('/postNewItem', (req, res) => {
   console.log('here are the params -->', req.body)
-  postAnime(req.body, (err, data) => {
-    if(err){
-      console.log('problem with posting to table in mysql in server')
-    } else {
+  postAnime(req.body)
+    .then(data => {
       res.send(data)
-    }
-  })
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
 })
 
 app.delete('/deleteAnime', (req, res) => {
   console.log(req.query.uniqueId)
-  deleteAnime(req.query.uniqueId, (err, data) => {
-    if(err){
-      console.log('nah did not delete from db in server')
-    } else {
-      console.log('succesfully deleted the thing')
-      res.end();
-    }
-  })
+  deleteAnime(req.query.uniqueId)
+    .then(data => {
+      res.send(data)
+    })
+    .catch(err => {
+      res.status(500).send(err)
+    })
 })
