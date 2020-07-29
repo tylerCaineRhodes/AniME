@@ -53,7 +53,7 @@ source schema.sql
 3.  Launch the project with your IOS simulator:
 
 ```bash
-npm run expo start --ios
+npm run ios
 ```
 
 ## Contact
