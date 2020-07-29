@@ -1,4 +1,5 @@
-# AniMミ
+# AniMミ <img src = './assets/animeicon_480.png' width ='40px' height ='40px' />
+
 
 AniMミ is an app that simplifies the process for searching and saving anime suggestions. It provides functionality for English and Japanese titles.
 
