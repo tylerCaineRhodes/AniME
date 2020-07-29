@@ -28,7 +28,7 @@ Before you run pre-production code, ensure you have met the following requiremen
 - You have MySQL running on your local machine.
 - You have NodeJS, [npm](https://www.npmjs.com/), and a code editor such as VScode. 
 
-## Install and Run
+## Install and Run Developer Environment
 <img src = './demoSources/aniME video.gif'  align="right"/>
 
 Use the package manager [npm](https://www.npmjs.com/) to install all of the dependencies. Run the following command in your project directory.
@@ -50,7 +50,12 @@ mysql -u root -p
 source schema.sql 
 ```
 
-3.  Launch the project with your IOS simulator:
+3. Start your server with nodemon:
+```bash
+npm run dev-server
+```
+
+4.  Launch the project with your IOS simulator:
 
 ```bash
 npm run ios
