@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.listen(port, () => {
-  console.log(`you're officially listening to your mom at port ${port}`);
+  console.log(`you're officially listening to your お母さん at port ${port}`);
 });
 
 app.get('/getUserList', (req, res) => {
@@ -26,7 +26,6 @@ app.get('/getUserList', (req, res) => {
 });
 
 app.post('/postNewItem', (req, res) => {
-  console.log('here are the params -->', req.body);
   postAnime(req.body)
     .then((data) => {
       res.send(data);
@@ -37,7 +36,6 @@ app.post('/postNewItem', (req, res) => {
 });
 
 app.delete('/deleteAnime', (req, res) => {
-  console.log(req.query.uniqueId);
   deleteAnime(req.query.uniqueId)
     .then((data) => {
       res.send(data);

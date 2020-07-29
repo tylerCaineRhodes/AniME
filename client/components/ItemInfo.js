@@ -31,14 +31,14 @@ export default function ItemInfo({
         <Text style={styles.description}>{description}</Text>
         <View style={styles.buttonLine}>
           <Button
-            title="home 帰る"
+            title='home 帰る'
             buttonStyle={styles.button}
             onPress={() => {
               handleGoHome();
             }}
           />
           <Button
-            title="Add to list! セーブデータ"
+            title='Add to list! セーブデータ'
             buttonStyle={styles.button}
             onPress={() => {
               addToList(itemId);
@@ -67,13 +67,15 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: 'bold',
     position: 'relative',
+    marginVertical: 2,
   },
   description: {
     width: 300,
+    marginTop: 30
   },
   buttonLine: {
     flex: 1,
-    flexDirection: 'row',
+    flexDirection: 'row'
   },
   button: {
     margin: 10,
