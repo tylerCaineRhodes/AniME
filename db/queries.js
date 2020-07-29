@@ -40,10 +40,11 @@ const postAnime = (anime) => {
 };
 
 const deleteAnime = (id) => {
+  const query = `delete from savedlist where mal_id = ?`;
+  const input = [id];
+
   return new Promise((resolve, reject) => {
-    connection.query(
-      `delete from savedlist where mal_id = ${id}`,
-      (err, data) => {
+    connection.query(query, input, (err, data) => {
         if (err) {
           console.log('whoops in deleting a thing from db');
           reject(err);
@@ -57,7 +58,7 @@ const deleteAnime = (id) => {
 
 connection.connect((err) => {
   if (err) {
-    console.log("can't connected to myslq yet");
+    console.log("can't connected to myslq");
   } else {
     console.log("you're connected to your database");
   }
