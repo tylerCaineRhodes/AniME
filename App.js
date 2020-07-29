@@ -1,19 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Header, SearchBar, Overlay, Image, Icon } from 'react-native-elements';
-import { Banner, Button, ThemeProvider } from 'react-native-paper';
+import { Banner, Button} from 'react-native-paper';
 import Axios from 'axios';
 import ListItem from './client/components/ListItem.js';
 import ItemInfo from './client/components/ItemInfo.js';
 import SavedItem from './client/components/SavedItem';
 import Logo from './assets/animelogo_opt1.png';
-import AppLogo from './assets/animeicon_480.png';
 import Classics from './assets/animecollage1.jpg';
-import Newies from './assets/animecollage2.png';
-import Pikachu from './assets/pikachuWithHat.png';
-{/* <Image source={Classics} style={{width:'100%', height: 750}} />
-<Image source={Pikachu} style={{width: 400, height: 400}} /> */}
-export default class App extends React.Component {
+
+export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -148,13 +144,10 @@ export default class App extends React.Component {
   handleSubmit() {
     Axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
       .then((response) => {
-        let result = [];
+        const { results } = response.data;
 
-        for (var keys in response.data) {
-          result.push(response.data[keys]);
-        }
         this.setState({
-          data: result[4],
+          data: results,
           search: '',
         });
       })
@@ -167,7 +160,7 @@ export default class App extends React.Component {
     const opener = (
       <Image source={Classics} style={{ width: '100%', height: 750 }} />
     );
-    const nothing = <Text>""</Text>;
+    const nothing = <Text></Text>;
     return (
       <>
         <Header
@@ -270,15 +263,6 @@ export default class App extends React.Component {
               onPress: () => this.setState({ listShow: true }),
             },
           ]}
-          // icon={({ size }) =>
-          //     <Image
-          //       source={Pikachu}
-          //       style={{
-          //         width: 10,
-          //         height: 20,
-          //       }}
-          //     />
-          //   }
         ></Banner>
 
         <SearchBar
@@ -314,7 +298,6 @@ export default class App extends React.Component {
           })}
 
           <View style={styles.message}>
-            {/* <Text style={styles.textHello}>Search for your favorite anime!</Text> */}
             {this.state.data.length === 0 ? opener : nothing}
           </View>
         </ScrollView>
