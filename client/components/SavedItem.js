@@ -23,7 +23,7 @@ export default function SavedItem({
       <View style={styles.item}>
         <Image
           source={{ uri: image }}
-          style={{ width: 100, height: 100, position: 'absolute', margin: 10 }}
+          style={{ width: 100, height: 100, position: 'absolute', top: -5, margin: 10, borderRadius: 15 }}
         />
 
         <View style={styles.itemContainer}>
@@ -74,16 +74,17 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     padding: 25,
     // height: 160,
-    borderWidth: 1,
-    borderRadius: 20,
+    borderWidth: .5,
+    borderRadius: 15,
     overflow: 'hidden',
-    // margin: 5
+    margin: 10
   },
   title: {
     fontWeight: 'bold',
     position: 'absolute',
     textAlignVertical: 'center',
-    fontSize: 20,
+    fontSize: 15,
+    width: 245
   },
   description: {
     top: 30,
@@ -98,13 +99,13 @@ const styles = StyleSheet.create({
   },
   buttonDelete: {
     top: '80%',
-    left: 14,
+    left: 13,
     backgroundColor: 'white',
     padding: 0,
   },
   buttonShare: {
     top: 18,
-    right: 200,
+    right: 180,
   },
   itemContainer: {
     flex: 1,

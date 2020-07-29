@@ -23,18 +23,13 @@ const getList = () => {
 
 const postAnime = (anime) => {
   return new Promise((resolve, reject) => {
-    connection.query(
-      `insert into savedlist(title, title_Japanese, url, type, episodes, mal_id, rating) values ('
-      ${anime.title}', 
-      '${anime.title_Japanese}', 
-      '${anime.url}', 
-      '${anime.type}', 
-      ${anime.episodes}, 
-      ${anime.mal_id}, 
-      '${anime.rating}');`,
-      (err, data) => {
+    const {title, title_Japanese, url, type, episodes, mal_id, rating} = anime;
+    const query = `insert into savedlist(title, title_Japanese, url, type, episodes, mal_id, rating) values (?,?,?,?,?,?,?)`;
+    const input = [ title.trim(), title_Japanese.trim(), url.trim(), type.trim(), episodes, mal_id, rating ];
+
+    connection.query(query, input, (err, data) => {
         if (err) {
-          console.log('propblem with adding object to mysql table from db');
+          console.log('problem with adding object to mysql table from db');
           reject(err);
         } else {
           resolve(data);
