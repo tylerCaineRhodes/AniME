@@ -16,17 +16,18 @@
     "expo": "~36.0.0",
     "express": "^4.17.1",
     "mysql": "^2.18.1",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.4",
     "path": "^0.12.7",
     "react": "~16.9.0",
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-elements": "^1.2.7",
-    "react-native-paper": "^3.8.0",
+    "react-native-paper": "^3.11.0",
+    "react-native-vector-icons": "^7.0.0",
     "react-native-web": "~0.11.7"
   },
   "devDependencies": {
-    "@babel/core": "^7.9.0",
+    "@babel/core": "^7.10.5",
     "babel-preset-expo": "~8.0.0"
   },
   "private": true

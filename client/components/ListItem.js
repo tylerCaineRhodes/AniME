@@ -23,8 +23,12 @@ export default function ListItem({
           source={{ uri: image }}
           style={{ width: 100, height: 100, marginTop: 20 }}
         />
-        <Text style={styles.title}>{title}</Text>
-        <Text style={styles.description}>{description}</Text>
+        <Text ellipsizeMode='tail' style={styles.title} numberOfLines={1}>
+          {title}
+        </Text>
+        <Text ellipsizeMode='tail' style={styles.description} numberOfLines={6}>
+          {description}
+        </Text>
       </View>
     </TouchableOpacity>
   );
@@ -49,9 +53,12 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   title: {
+    // flex: 1,
     fontWeight: 'bold',
     position: 'relative',
     left: 55,
+    alignSelf: "flex-start",
+    width: 200
     // fontFamily:'sans-serif',
   },
   description: {
@@ -60,5 +67,6 @@ const styles = StyleSheet.create({
     left: 150,
     position: 'absolute',
     width: 250,
+    // fontSize: 12
   },
 });

@@ -77,6 +77,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 20,
     overflow: 'hidden',
+    // margin: 5
   },
   title: {
     fontWeight: 'bold',
