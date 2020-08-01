@@ -4,8 +4,7 @@ import { Button } from 'react-native-paper';
 import { Input } from 'react-native-elements';
 
 const Signup = ({ navigation }) => {
-  const goHome = () => navigation.navigate('Home');
-
+  const goToLogin = () => navigation.navigate('Login');
   return (
     <>
       <Input placeholder='username' style={styles.formInput} />
@@ -14,7 +13,7 @@ const Signup = ({ navigation }) => {
       <Button
         style={styles.bigButton}
         mode='contained'
-        onPress={goHome}
+        onPress={goToLogin}
         color={'#3D4AA3'}
       >
         Signup

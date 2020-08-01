@@ -8,7 +8,6 @@ import ItemInfo from './ItemInfo.js';
 import SavedItem from './SavedItem';
 import Logo from '../../assets/animelogo_opt1.png';
 import Classics from '../../assets/animecollage1.jpg';
-
 export default class App extends Component {
   constructor(props) {
     super(props);
