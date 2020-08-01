@@ -28,7 +28,7 @@ CREATE TABLE savedlist (
 
 CREATE TABLE users (
   id int auto_increment primary key, 
-  name text,
+  username text,
   password varchar(255)
 );
 
@@ -43,8 +43,8 @@ CREATE TABLE users_savedlist (
 insert into savedList (title, title_japanese, url, type, mal_id, episodes, rating) values ('MagicHighskewlProject','魔法の高校プロジェクトNOW!', 'https://www.allthingsdogs.com/wp-content/uploads/2020/02/Dog-Sneezing-Feature.jpg','anime',3,  5, 'pg-13');
 insert into savedList (title, title_japanese, url, type, mal_id, episodes, rating) values ('Hair Man','髪の男', 'https://watchmojo.com/uploads/blipthumbs/VG-RP-Top10-Absurd-VideoGame-Hairstyles-720p30_480.jpg','hair', 666,  5, "hairded hair hair");
 
-insert into users (name, password) values ('Tyler', 'password');
-insert into users (name, password) values ('notTyler', 'passwordagain');
+insert into users (username, password) values ('Tyler', 'Password');
+insert into users (username, password) values ('notTyler', 'Passwordagain');
 
 insert into users_savedlist (anime_id, user_id) values (1, 1);
 insert into users_savedlist (anime_id, user_id) values (2, 1);
