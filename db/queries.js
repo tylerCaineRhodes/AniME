@@ -39,6 +39,22 @@ const postAnime = (anime) => {
   });
 };
 
+const getUser = async(user) => {
+  return new Promise((resolve, reject) => {
+    const query = `select * from users where username = ?`
+    const input = [user];
+
+    connection.query(query, input, (err, data) => {
+      if(err){
+        console.log('err from query')
+        reject(err)
+      } else {
+        resolve(data)
+      }
+    })
+  })
+}
+
 const deleteAnime = (id) => {
   const query = `delete from savedlist where mal_id = ?`;
   const input = [id];
@@ -64,4 +80,4 @@ connection.connect((err) => {
   }
 });
 
-module.exports = { getList, postAnime, deleteAnime };
+module.exports = { getList, postAnime, deleteAnime, getUser };

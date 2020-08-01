@@ -9,9 +9,11 @@
     "dev-server": "nodemon server.js"
   },
   "dependencies": {
+    "@react-native-community/masked-view": "0.1.5",
     "@react-navigation/native": "^5.7.2",
     "@react-navigation/stack": "^5.8.0",
     "axios": "^0.19.2",
+    "bcrypt": "^5.0.0",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
@@ -24,14 +26,14 @@
     "react-dom": "~16.9.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-36.0.0.tar.gz",
     "react-native-elements": "^1.2.7",
-    "react-native-paper": "^3.11.0",
-    "react-native-vector-icons": "^7.0.0",
-    "react-native-web": "~0.11.7",
-    "react-native-reanimated": "~1.4.0",
     "react-native-gesture-handler": "~1.5.0",
-    "react-native-screens": "2.0.0-alpha.12",
+    "react-native-paper": "^3.11.0",
+    "react-native-reanimated": "~1.4.0",
+    "react-native-router-flux": "^4.2.0",
     "react-native-safe-area-context": "0.6.0",
-    "@react-native-community/masked-view": "0.1.5"
+    "react-native-screens": "2.0.0-alpha.12",
+    "react-native-vector-icons": "^7.0.0",
+    "react-native-web": "~0.11.7"
   },
   "devDependencies": {
     "@babel/core": "^7.10.5",
