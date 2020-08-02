@@ -28,5 +28,5 @@ Content-Type: application/json
 
 {
   "mal_id": 226,
-  "userId": 1
+  "userId": 3
 }

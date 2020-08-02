@@ -40,8 +40,9 @@ export default class App extends Component {
   }
 
   fetchUserList() {
-    Axios.get('http://localhost:3030/getUserList')
+    Axios.get(`http://localhost:3030/getUserList/${this.state.userId}`)
       .then((response) => {
+        console.log(response.data)
         this.setState({
           savedList: response.data,
         }, () => console.log(this.state));
@@ -107,6 +108,7 @@ export default class App extends Component {
   // this.addToUserList(response.data['mal_id']);
 
   postNewItem(response) {
+    const savedAnimeId = response.data['mal_id'];
     Axios.post('http://localhost:3030/postNewItem', {
       synopsis: response.data['synopsis'],
       title: response.data['title'],
@@ -117,6 +119,9 @@ export default class App extends Component {
       episodes: response.data['episodes'],
       rating: response.data['rating'],
     })
+      .then(() => {
+        this.addToUserList(savedAnimeId);
+      })
       .then(() => {
         this.fetchUserList();
       })
@@ -137,16 +142,13 @@ export default class App extends Component {
         console.log("couldn't delete from front", err);
       });
   }
-
+  //this is what is initially triggered
   addToList(uniqueId) {
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
+        //this is posting to the database
         this.postNewItem(response);
         console.log('posted new item')
-        return response
-      })
-      .then((response) => {
-        this.addToUserList(response.data['mal_id']);
       })
       .then(() => {
         this.setState({
