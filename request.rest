@@ -2,7 +2,7 @@ POST http://localhost:3030/signin
 Content-Type: application/json
 
 {
-  "username": "Tyler",
-  "password": "Password"
+  "username": "poopman69",
+  "password": "Password123"
 }
 

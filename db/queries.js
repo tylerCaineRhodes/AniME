@@ -40,9 +40,27 @@ const postAnime = (anime) => {
 };
 
 const getUser = async(user) => {
+  console.log(user, '<-- username')
   return new Promise((resolve, reject) => {
     const query = `select * from users where username = ?`
     const input = [user];
+
+    connection.query(query, input, (err, data) => {
+      if(err){
+        console.log('err from query')
+        reject(err)
+      } else {
+        console.log(data, '<--- data from query')
+        resolve(data)
+      }
+    })
+  })
+}
+
+const addUser = async(username, password) => {
+  return new Promise((resolve, reject) => {
+    const query = `insert into users (username, password) values (?,?)`
+    const input = [username, password];
 
     connection.query(query, input, (err, data) => {
       if(err){
@@ -80,4 +98,4 @@ connection.connect((err) => {
   }
 });
 
-module.exports = { getList, postAnime, deleteAnime, getUser };
+module.exports = { getList, postAnime, deleteAnime, getUser, addUser };

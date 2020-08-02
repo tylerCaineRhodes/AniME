@@ -5,7 +5,7 @@ const port = 3030;
 const app = express();
 const bcrypt = require('bcrypt');
 const cors = require('cors');
-const { getList, postAnime, deleteAnime, getUser } = require('./db/queries.js');
+const { getList, postAnime, deleteAnime, getUser, addUser } = require('./db/queries.js');
 
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
@@ -18,30 +18,24 @@ app.listen(port, () => {
 
 app.post('/signin', (req, res) => {
   //get user info 
-  getUser(req.body.username)
+  const {username, password} = req.body;
+  getUser(username)
   .then((data) => {
     //compare password that was returned with input password -  bcrypt
     const userPassword = data[0].password;
-    const passwordIsMatch = bcrypt.compareSync(password, userPassword);
+    const passwordIsMatch = bcrypt.compareSync( password, userPassword );
     //if they match, done
     if(passwordIsMatch){
+      console.log('passwords match and should lg in from here')
       res.send(data)
     } else {
       res.send(500).send('incorrect password')
     }
-    res.status(201).send(data)
   })
   .catch(err => {
-    console.log('from server')
+    console.log('failing to find username')
     res.status(500).send(err)
   })
-
-  //check and see if the user exists in the db
-  //if they don't, send err
-  //if they do, hash password
-  //get user password and compare it to hash,
-  //if they don't match, send error that password was wrong
-  //if they do, send 201, along with user info
 });
 
 app.post('/register', async(req, res) => {
@@ -52,10 +46,22 @@ app.post('/register', async(req, res) => {
   } catch {
     res.sendStatus(518)
   }
-
   //check to see if username already exists
-  //if it does, send 'taken
-  //else, hash password and insert into db. then, send response
+  getUser( username )
+  .then((data) => { 
+    if(data.length === 0){
+      addUser(username, hashed)
+        .then((data) => console.log(data, '<-- data after posting new user to db'))
+        .catch((err) => {
+          res.status(518).send(err)
+        })
+    } else {
+      res.status(500).send('username already taken')
+    }
+  })
+  .catch((err) => {
+    res.status(500).send('error in calling getUser', err)
+  })
 })
 
 app.get('/getUserList', (req, res) => {
