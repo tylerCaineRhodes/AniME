@@ -85,7 +85,6 @@ app.post('/addToJunction', (req, res) => {
 });
 
 app.get('/getUserList/:userId', (req, res) => {
-  console.log(req.params.userId, '< -- userId')
   getList(req.params.userId)
     .then((data) => {
       res.send(data);
