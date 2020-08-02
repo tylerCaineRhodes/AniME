@@ -5,7 +5,14 @@ const port = 3030;
 const app = express();
 const bcrypt = require('bcrypt');
 const cors = require('cors');
-const { getList, postAnime, deleteAnime, getUser, addUser } = require('./db/queries.js');
+const {
+  getList,
+  postAnime,
+  deleteAnime,
+  getUser,
+  addUser,
+  addToJunction,
+} = require('./db/queries.js');
 
 app.use(cors());
 app.use(express.static(path.join(__dirname)));
@@ -29,12 +36,11 @@ app.post('/signin', (req, res) => {
       console.log('passwords match and should lg in from here')
       res.send(data)
     } else {
-      res.send(500).send('incorrect password')
+      res.status(500).send('incorrect password')
     }
   })
   .catch(err => {
-    console.log('failing to find username')
-    res.status(500).send(err)
+    res.status(500).send('failed to find username')
   })
 });
 
@@ -64,6 +70,19 @@ app.post('/register', async(req, res) => {
       res.status(500).send('error in calling getUser', err)
     })
 })
+
+app.post('/addToJunction', (req, res) => {
+  const { mal_id, userId } = req.body;
+
+  addToJunction(mal_id, userId)
+    .then((data) => {
+      console.log(data, '< data from call');
+      res.send(data);
+    })
+    .catch((err) => {
+      res.status(518).send(err);
+    });
+});
 
 app.get('/getUserList', (req, res) => {
   getList()

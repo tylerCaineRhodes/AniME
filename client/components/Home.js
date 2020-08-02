@@ -12,6 +12,8 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userId: this.props.route.params.userId,
+      username: this.props.route.params.username,
       search: '',
       data: [],
       savedList: [],
@@ -30,6 +32,7 @@ export default class App extends Component {
     this.showList = this.showList.bind(this);
     this.fetchUserList = this.fetchUserList.bind(this);
     this.deleteAnime = this.deleteAnime.bind(this);
+    this.addToUserList = this.addToUserList.bind(this);
   }
 
   componentDidMount() {
@@ -41,7 +44,7 @@ export default class App extends Component {
       .then((response) => {
         this.setState({
           savedList: response.data,
-        });
+        }, () => console.log(this.state));
       })
       .catch((err) => {
         console.log('problem with fetching data dawg', err);
@@ -91,6 +94,18 @@ export default class App extends Component {
     });
   }
 
+  addToUserList(mal_id){
+    //post the mal_id and user id to the join table.
+    console.log({mal_id}, this.state.userId)
+    Axios.post('/addToJunction', {
+      mal_id,
+      userId : this.state.userId
+    })
+    .then(() => console.log('added to junction'))
+    .catch(err => console.log(err, '<-- in trying to catch junction'))
+  }
+  // this.addToUserList(response.data['mal_id']);
+
   postNewItem(response) {
     Axios.post('http://localhost:3030/postNewItem', {
       synopsis: response.data['synopsis'],
@@ -127,6 +142,11 @@ export default class App extends Component {
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
         this.postNewItem(response);
+        console.log('posted new item')
+        return response
+      })
+      .then((response) => {
+        this.addToUserList(response.data['mal_id']);
       })
       .then(() => {
         this.setState({

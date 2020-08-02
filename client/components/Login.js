@@ -13,27 +13,23 @@ import Axios from 'axios'
 
 
 const Login = ({ navigation }) => {
-  const goHome = () => navigation.navigate('Home')
+  const goHome = (userId, username) => {
+    navigation.navigate('Home', {
+      userId,
+      username
+    });
+  }
   const goToSignup = () => navigation.navigate('Signup');
   const [username, handleusername] = useState('');
   const [password, handlepassword] = useState('');
 
   const handleSubmit = () => {
-    const longEnough = password.length >= 8;
-    const hasCapitalLetter = password.match(/[A-Z]/g);
-
-    if(!longEnough){
-      return alert('password isn\'t long enough- need to be at least 8 char')
-    }
-    if(!hasCapitalLetter) {
-      return alert('password should have at least one capital letter')
-    }
     Axios.post('http://localhost:3030/signin', {
       username,
       password,
     })
-    .then((res) => console.log(res.data))
-    .catch((err) => console.log('somethign went wrong from client -->', err));
+    .then((res) => goHome(res.data[0].id, res.data[0].username))
+    .catch((err) => alert(err.response.data));
   }
 
   return (
@@ -53,7 +49,7 @@ const Login = ({ navigation }) => {
       <Button
         style={styles.bigButton}
         mode='contained'
-        onPress={goHome}
+        onPress={handleSubmit}
         color={'#3D4AA3'}
       >
         Login
