@@ -4,7 +4,6 @@ import Home from './client/components/Home.js';
 import Login from './client/components/Login.js';
 import Signup from './client/components/Signup.js'
 import { NavigationContainer } from '@react-navigation/native';
-import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from '@react-navigation/stack';
 const Stack = createStackNavigator();
 

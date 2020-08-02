@@ -1,8 +1,24 @@
+POST http://localhost:3030/register 
+Content-Type: application/json
+
+{
+  "username": "Tyleriscool",
+  "password": "Password123"
+}
+
+###
+
 POST http://localhost:3030/signin 
 Content-Type: application/json
 
 {
-  "username": "poopman69",
+  "username": "Tyleriscool",
   "password": "Password123"
 }
 
+###
+
+GET http://localhost:3030/getUserList
+Content-Type: application/json
+
+###

@@ -22,6 +22,7 @@ export default class App extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleFuzzySearch = this.handleFuzzySearch.bind(this);
     this.requestAnime = this.requestAnime.bind(this);
     this.handleGoHome = this.handleGoHome.bind(this);
     this.addToList = this.addToList.bind(this);
@@ -80,6 +81,7 @@ export default class App extends Component {
   goToHomeScreen() {
     this.setState({
       data: [],
+      search: ''
     });
   }
 
@@ -137,12 +139,14 @@ export default class App extends Component {
   }
 
   handleChange(search) {
-    this.setState({ search });
+    this.setState({ search }, () => {
+      this.handleFuzzySearch();
+    });
   }
 
   handleSubmit() {
     Axios.get(
-      `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`
+      `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=15`
     )
       .then((response) => {
         const { results } = response.data;
@@ -155,6 +159,25 @@ export default class App extends Component {
       .catch((err) => {
         console.log('nah, dude');
       });
+
+  }
+
+  handleFuzzySearch() {
+    setTimeout(() => {
+      Axios.get(
+        `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=4`
+      )
+        .then((response) => {
+          const { results } = response.data;
+  
+          this.setState({
+            data: results,
+          });
+        })
+        .catch((err) => {
+          console.log('nah, dude');
+        });
+    }, 10)
   }
 
   render() {
