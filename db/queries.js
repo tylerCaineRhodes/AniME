@@ -8,13 +8,16 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME,
 });
 
-const getList = () => {
+const getList = (userId) => {
   return new Promise((resolve, reject) => {
-    connection.query(`select * from savedlist`, (err, data) => {
+    const query = `select l.title, l.title_japanese, l.url, l.type, l.mal_id, l.episodes, l.rating from savedlist l inner join users_savedlist us on (l.mal_id = us.anime_id) inner join users u on (u.id = us.user_id) where u.id = ${userId};`;
+
+    connection.query(query, (err, data) => {
       if (err) {
-        console.log('something went wrong with fetching from list in db');
+        console.log('something went wrong with fetching from list in db', err);
         reject(err);
       } else {
+        console.log(data, '< -- data after insertion')
         resolve(data);
       }
     });
