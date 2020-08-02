@@ -42,13 +42,12 @@ export default class App extends Component {
   fetchUserList() {
     Axios.get(`http://localhost:3030/getUserList/${this.state.userId}`)
       .then((response) => {
-        console.log(response.data)
         this.setState({
           savedList: response.data,
-        }, () => console.log(this.state));
+        });
       })
       .catch((err) => {
-        console.log('problem with fetching data dawg', err);
+        console.log('problem with fetching users from junction in the front', err);
       });
   }
 
@@ -97,13 +96,12 @@ export default class App extends Component {
 
   addToUserList(mal_id){
     //post the mal_id and user id to the join table.
-    console.log({mal_id}, this.state.userId)
-    Axios.post('/addToJunction', {
-      mal_id,
-      userId : this.state.userId
+    Axios.post('http://localhost:3030/addToJunction', {
+      mal_id: mal_id,
+      userId: this.state.userId,
     })
-    .then(() => console.log('added to junction'))
-    .catch(err => console.log(err, '<-- in trying to catch junction'))
+      .then(() => console.log('added to junction'))
+      .catch((err) => console.log(err, '<-- in trying to catch junction'));
   }
   // this.addToUserList(response.data['mal_id']);
 
@@ -148,7 +146,6 @@ export default class App extends Component {
       .then((response) => {
         //this is posting to the database
         this.postNewItem(response);
-        console.log('posted new item')
       })
       .then(() => {
         this.setState({
@@ -156,7 +153,7 @@ export default class App extends Component {
         });
       })
       .catch((err) => {
-        console.log('nah, dude', err);
+        console.log('error from querying jikan', err);
       });
   }
 
