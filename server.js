@@ -33,7 +33,6 @@ app.post('/signin', (req, res) => {
     const passwordIsMatch = bcrypt.compareSync( password, userPassword );
     //if they match, done
     if(passwordIsMatch){
-      console.log('passwords match and should lg in from here')
       res.send(data)
     } else {
       res.status(500).send('incorrect password')
@@ -76,7 +75,6 @@ app.post('/addToJunction', (req, res) => {
 
   addToJunction(mal_id, userId)
     .then((data) => {
-      console.log(data, '< data from call');
       res.send(data);
     })
     .catch((err) => {
@@ -104,8 +102,9 @@ app.post('/postNewItem', (req, res) => {
     });
 });
 
-app.delete('/deleteAnime', (req, res) => {
-  deleteAnime(req.query.uniqueId)
+app.delete(`/deleteAnime`, (req, res) => {
+  console.log(req.body)
+  deleteAnime(req.body)
     .then((data) => {
       res.send(data);
     })
