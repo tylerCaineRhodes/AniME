@@ -22,3 +22,11 @@ GET http://localhost:3030/getUserList
 Content-Type: application/json
 
 ###
+
+POST http://localhost:3030/addToJunction
+Content-Type: application/json
+
+{
+  "mal_id": 226,
+  "userId": 1
+}

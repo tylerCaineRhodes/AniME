@@ -16,12 +16,12 @@ create database anime;
 use anime;
 
 CREATE TABLE savedlist (
-  id int auto_increment primary key, 
+  -- id int auto_increment primary key, 
   title text, 
   title_Japanese VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL, 
   url text,
   type text, 
-  mal_id int,
+  mal_id int primary key,
   episodes int,
   rating text
 );
@@ -36,7 +36,7 @@ CREATE TABLE users (
 CREATE TABLE users_savedlist (
   anime_id int,
   user_id int,
-  FOREIGN KEY (anime_id) REFERENCES savedlist(id),
+  FOREIGN KEY (anime_id) REFERENCES savedlist(mal_id),
   FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -46,7 +46,7 @@ insert into savedList (title, title_japanese, url, type, mal_id, episodes, ratin
 insert into users (username, password) values ('Tyler', 'Password');
 insert into users (username, password) values ('notTyler', 'Passwordagain');
 
-insert into users_savedlist (anime_id, user_id) values (1, 1);
-insert into users_savedlist (anime_id, user_id) values (2, 1);
+insert into users_savedlist (anime_id, user_id) values (3, 1);
+insert into users_savedlist (anime_id, user_id) values (666, 1);
 
 select * from savedList;

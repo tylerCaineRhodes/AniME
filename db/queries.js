@@ -90,6 +90,24 @@ const deleteAnime = (id) => {
   });
 };
 
+const addToJunction = (mal_id, userId) => {
+  const query = `insert into users_savedlist (anime_id, user_id) values (?,?)`;
+  const input = [mal_id, userId];
+
+  return new Promise((resolve, reject) => {
+    connection.query(query, input, (err, data) => {
+        if (err) {
+          console.log('whoops in posting a thing into junction table');
+          reject(err);
+        } else {
+          console.log('data from users_savedlist pass')
+          resolve(data);
+        }
+      }
+    );
+  });
+};
+
 connection.connect((err) => {
   if (err) {
     console.log("can't connected to myslq");
@@ -98,4 +116,4 @@ connection.connect((err) => {
   }
 });
 
-module.exports = { getList, postAnime, deleteAnime, getUser, addUser };
+module.exports = { getList, postAnime, deleteAnime, getUser, addUser, addToJunction };
