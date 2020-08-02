@@ -78,6 +78,7 @@ export default class App extends Component {
     this.setState({
       infoIsVisible: false,
       listShow: false,
+      search: ''
     });
   }
 
@@ -129,8 +130,11 @@ export default class App extends Component {
   }
 
   deleteAnime(uniqueId) {
-    Axios.delete('http://localhost:3030/deleteAnime', {
-      params: { uniqueId },
+    Axios.delete(`http://localhost:3030/deleteAnime`, {
+      data: { 
+        mal_id: uniqueId,
+        user_id: this.state.userId
+      },
     })
       .then(() => {
         console.log('succesfully deleted!');
@@ -176,7 +180,7 @@ export default class App extends Component {
         });
       })
       .catch((err) => {
-        console.log('nah, dude');
+        console.log('error from handle submit');
       });
 
   }
@@ -184,7 +188,7 @@ export default class App extends Component {
   handleFuzzySearch() {
     setTimeout(() => {
       Axios.get(
-        `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=4`
+        `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`
       )
         .then((response) => {
           const { results } = response.data;
@@ -194,7 +198,7 @@ export default class App extends Component {
           });
         })
         .catch((err) => {
-          console.log('nah, dude');
+          console.log('fuzzy search blip');
         });
     }, 10)
   }
@@ -360,8 +364,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'grey',
   },
   message: {
-    // top: 200,
-    // left: 11,
     overflow: 'scroll',
   },
   textHello: {
