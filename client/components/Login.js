@@ -53,7 +53,7 @@ const Login = ({ navigation }) => {
       <Button
         style={styles.bigButton}
         mode='contained'
-        onPress={handleSubmit}
+        onPress={goHome}
         color={'#3D4AA3'}
       >
         Login

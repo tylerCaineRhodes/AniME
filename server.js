@@ -48,20 +48,21 @@ app.post('/register', async(req, res) => {
   }
   //check to see if username already exists
   getUser( username )
-  .then((data) => { 
-    if(data.length === 0){
-      addUser(username, hashed)
-        .then((data) => console.log(data, '<-- data after posting new user to db'))
-        .catch((err) => {
-          res.status(518).send(err)
-        })
-    } else {
-      res.status(500).send('username already taken')
-    }
-  })
-  .catch((err) => {
-    res.status(500).send('error in calling getUser', err)
-  })
+    .then((data) => { 
+      if(data.length === 0){
+        addUser(username, hashed)
+        //here, do a thing to redirect to login
+          .then((data) => console.log(data, '<-- data after posting new user to db'))
+          .catch((err) => {
+            res.status(518).send(err)
+          })
+      } else {
+        res.status(500).send('username already taken')
+      }
+    })
+    .catch((err) => {
+      res.status(500).send('error in calling getUser', err)
+    })
 })
 
 app.get('/getUserList', (req, res) => {
