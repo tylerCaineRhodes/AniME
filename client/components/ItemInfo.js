@@ -1,12 +1,9 @@
 import React from 'react';
-import { useState } from 'react';
 import {
   StyleSheet,
   Text,
   View,
-  TextInput,
   Image,
-  TouchableOpacity,
   ScrollView,
 } from 'react-native';
 import { Button } from 'react-native-elements';
@@ -16,7 +13,6 @@ export default function ItemInfo({
   title,
   title_japanese,
   image,
-  type,
   handleGoHome,
   itemId,
   addToList,
