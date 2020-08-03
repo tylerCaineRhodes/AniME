@@ -96,7 +96,6 @@ export default class App extends Component {
   }
 
   addToUserList(mal_id){
-    //post the mal_id and user id to the join table.
     Axios.post('http://localhost:3030/addToJunction', {
       mal_id: mal_id,
       userId: this.state.userId,
@@ -104,7 +103,6 @@ export default class App extends Component {
       .then(() => console.log('added to junction'))
       .catch((err) => console.log(err, '<-- in trying to catch junction'));
   }
-  // this.addToUserList(response.data['mal_id']);
 
   postNewItem(response) {
     const savedAnimeId = response.data['mal_id'];
@@ -144,11 +142,10 @@ export default class App extends Component {
         console.log('couldn\'t delete from axios', err);
       });
   }
-  //this is what is initially triggered
+  
   addToList(uniqueId) {
     Axios.get(`https://api.jikan.moe/v3/anime/${uniqueId}`)
       .then((response) => {
-        //this is posting to the database
         this.postNewItem(response);
       })
       .then(() => {
