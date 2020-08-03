@@ -6,7 +6,7 @@ const app = express();
 const bcrypt = require('bcrypt');
 const cors = require('cors');
 const {
-  getList,
+  getSavedList,
   postAnime,
   deleteAnime,
   getUser,
@@ -24,14 +24,11 @@ app.listen(port, () => {
 });
 
 app.post('/signin', (req, res) => {
-  //get user info 
   const {username, password} = req.body;
   getUser(username)
   .then((data) => {
-    //compare password that was returned with input password -  bcrypt
     const userPassword = data[0].password;
     const passwordIsMatch = bcrypt.compareSync( password, userPassword );
-    //if they match, done
     if(passwordIsMatch){
       res.send(data)
     } else {
@@ -39,7 +36,7 @@ app.post('/signin', (req, res) => {
     }
   })
   .catch(err => {
-    res.status(500).send('failed to find username')
+    res.status(404).send('failed to find username')
   })
 });
 
@@ -49,24 +46,23 @@ app.post('/register', async(req, res) => {
     var hashed = await bcrypt.hash(password, 10);
     
   } catch {
-    res.sendStatus(518)
+    res.sendStatus(500)
   }
   //check to see if username already exists
   getUser( username )
     .then((data) => { 
       if(data.length === 0){
         addUser(username, hashed)
-        //here, do a thing to redirect to login
-          .then((data) => console.log(data, '<-- data after posting new user to db'))
+          .then((data) => res.status(200).send('succesfully added user'))
           .catch((err) => {
-            res.status(518).send(err)
+            res.status(418).send(err)
           })
       } else {
         res.status(500).send('username already taken')
       }
     })
     .catch((err) => {
-      res.status(500).send('error in calling getUser', err)
+      res.status(404).send('error in calling getUser', err)
     })
 })
 
@@ -78,17 +74,17 @@ app.post('/addToJunction', (req, res) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(518).send(err);
+      res.status(502).send(err);
     });
 });
 
 app.get('/getUserList/:userId', (req, res) => {
-  getList(req.params.userId)
+  getSavedList(req.params.userId)
     .then((data) => {
       res.send(data);
     })
     .catch((err) => {
-      res.status(518).send(err);
+      res.status(404).send(err);
     });
 });
 
@@ -103,7 +99,6 @@ app.post('/postNewItem', (req, res) => {
 });
 
 app.delete(`/deleteAnime`, (req, res) => {
-  console.log(req.body)
   deleteAnime(req.body)
     .then((data) => {
       res.send(data);

@@ -117,6 +117,7 @@ export default class App extends Component {
       mal_id: response.data['mal_id'],
       episodes: response.data['episodes'],
       rating: response.data['rating'],
+      userId: this.state.userId,
     })
       .then(() => {
         this.addToUserList(savedAnimeId);
