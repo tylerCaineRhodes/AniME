@@ -29,7 +29,7 @@ const postAnime = (anime) => {
   return new Promise((resolve, reject) => {
     const { title, title_Japanese, url, type, episodes, mal_id, rating, userId } = anime;
     const input = [ title.trim(), title_Japanese.trim(), url.trim(), type.trim(), episodes, mal_id, rating ];
-    const query = `INSET INTO savedlist(title, title_Japanese, url, type, episodes, mal_id, rating) VALUES (?,?,?,?,?,?,?)`;
+    const query = `INSERT INTO savedlist(title, title_Japanese, url, type, episodes, mal_id, rating) VALUES (?,?,?,?,?,?,?)`;
 
     connection.query(query, input, (err, data) => {
       if (err) {

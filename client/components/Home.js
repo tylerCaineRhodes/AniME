@@ -124,7 +124,7 @@ export default class App extends Component {
         this.fetchUserList();
       })
       .catch((err) => {
-        console.log("didn't work when sending from axios", err);
+        console.log("didn't work when sending from axios from postNewItem", err);
       });
   }
 
