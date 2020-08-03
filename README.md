@@ -24,8 +24,8 @@ AniMミ is an app that simplifies the process for searching and saving anime sug
 ## Prerequisites
 Before you run pre-production code, ensure you have met the following requirements:
 
-- You have access to an Iphone simulator on your local machine via XCode.
-- You have MySQL running on your local machine.
+- You have access to an Iphone simulator on your computer via XCode.
+- You have MySQL installed on your computer.
 - You have NodeJS, [npm](https://www.npmjs.com/), and a code editor such as VScode. 
 
 ## Install and Run Developer Environment
