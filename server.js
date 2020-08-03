@@ -24,47 +24,46 @@ app.listen(port, () => {
 });
 
 app.post('/signin', (req, res) => {
-  const {username, password} = req.body;
-  getUser(username)
-  .then((data) => {
-    const userPassword = data[0].password;
-    const passwordIsMatch = bcrypt.compareSync( password, userPassword );
-    if(passwordIsMatch){
-      res.send(data)
-    } else {
-      res.status(500).send('incorrect password')
-    }
-  })
-  .catch(err => {
-    res.status(404).send('failed to find username')
-  })
-});
-
-app.post('/register', async(req, res) => {
   const { username, password } = req.body;
-  try {
-    var hashed = await bcrypt.hash(password, 10);
-    
-  } catch {
-    res.sendStatus(500)
-  }
-  //check to see if username already exists
-  getUser( username )
-    .then((data) => { 
-      if(data.length === 0){
-        addUser(username, hashed)
-          .then((data) => res.status(200).send('succesfully added user'))
-          .catch((err) => {
-            res.status(418).send(err)
-          })
+  getUser(username)
+    .then((data) => {
+      const userPassword = data[0].password;
+      const passwordIsMatch = bcrypt.compareSync(password, userPassword);
+      if (passwordIsMatch) {
+        res.send(data);
       } else {
-        res.status(500).send('username already taken')
+        res.status(500).send('incorrect password');
       }
     })
     .catch((err) => {
-      res.status(404).send('error in calling getUser', err)
+      return res.status(404).send('failed to find username');
+    });
+});
+
+app.post('/register', async (req, res) => {
+  const { username, password } = req.body;
+  try {
+    var hashed = await bcrypt.hash(password, 10);
+  } catch {
+    res.sendStatus(500);
+  }
+  //check to see if username already exists
+  getUser(username)
+    .then((data) => {
+      if (data.length === 0) {
+        addUser(username, hashed)
+          .then((data) => res.status(200).send('succesfully added user'))
+          .catch((err) => {
+            res.status(418).send(err);
+          });
+      } else {
+        res.status(500).send('username already taken');
+      }
     })
-})
+    .catch((err) => {
+      res.status(404).send('error in calling getUser', err);
+    });
+});
 
 app.post('/addToJunction', (req, res) => {
   const { mal_id, userId } = req.body;
@@ -90,12 +89,8 @@ app.get('/getUserList/:userId', (req, res) => {
 
 app.post('/postNewItem', (req, res) => {
   postAnime(req.body)
-    .then((data) => {
-      res.send(data);
-    })
-    .catch((err) => {
-      res.status(500).send(err);
-    });
+    .then((data) => res.send(data))
+    .catch((err) => res.status(500).send(err));
 });
 
 app.delete(`/deleteAnime`, (req, res) => {

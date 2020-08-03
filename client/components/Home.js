@@ -70,7 +70,7 @@ export default class App extends Component {
         });
       })
       .catch((err) => {
-        console.log('nah, dude from request anime', err);
+        console.log('problem with requesting anime', err);
       });
   }
 
@@ -138,11 +138,10 @@ export default class App extends Component {
       },
     })
       .then(() => {
-        console.log('succesfully deleted!');
         this.fetchUserList();
       })
       .catch((err) => {
-        console.log("couldn't delete from front", err);
+        console.log('couldn\'t delete from axios', err);
       });
   }
   //this is what is initially triggered
@@ -169,28 +168,22 @@ export default class App extends Component {
   }
 
   handleSubmit() {
-    Axios.get(
-      `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=15`
-    )
+    Axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=15`)
       .then((response) => {
         const { results } = response.data;
-
         this.setState({
           data: results,
           search: '',
         });
       })
       .catch((err) => {
-        console.log('error from handle submit');
+        console.log('error from handle submit', err);
       });
-
   }
 
   handleFuzzySearch() {
     setTimeout(() => {
-      Axios.get(
-        `https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`
-      )
+      Axios.get(`https://api.jikan.moe/v3/search/anime?q=${this.state.search}&limit=10`)
         .then((response) => {
           const { results } = response.data;
   
@@ -201,7 +194,7 @@ export default class App extends Component {
         .catch((err) => {
           console.log('fuzzy search blip');
         });
-    }, 10)
+    }, 0);
   }
 
   render() {
