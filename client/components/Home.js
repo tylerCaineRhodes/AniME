@@ -265,6 +265,7 @@ export default class App extends Component {
                   itemId={item.mal_id}
                   requestAnime={this.requestAnime}
                   deleteAnime={this.deleteAnime}
+                  handleGoHome={this.handleGoHome}
                 />
               );
             })}

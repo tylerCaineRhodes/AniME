@@ -16,6 +16,7 @@ export default function SavedItem({
   itemId,
   requestAnime,
   deleteAnime,
+  handleGoHome
 }) {
   
   return (
